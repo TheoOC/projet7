@@ -1,10 +1,13 @@
 const axios = require('axios');
 
-exports.login = () => {
+exports.login = (data) => {
     return new Promise((resolve, reject) => {
-        axios.get('http://localhost:3000/api/auth/login')
-            .then(res => { console.log(res) })
-            .catch(() => reject('there was an error'));
+        axios.post('http://localhost:3000/api/auth/login', data)
+            .then(res => {
+                console.log('login request success');
+                resolve(res.data);
+            })
+            .catch(() => reject('error trying to login'));
 
     })
 };

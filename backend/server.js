@@ -1,6 +1,8 @@
 const app = require('./app');
 const http = require('http');
 
+require('dotenv').config();
+
 //return a valid port wether the val provided is a int or string
 const normalizePort = val => {
   const port = parseInt(val, 10);

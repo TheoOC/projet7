@@ -3,7 +3,7 @@
     <form class="login" @submit.prevent="login">
       <h1>login</h1>
 
-      <template v-if="loginType === 'username'">
+      <template v-if="loginType === 'email'">
         <label>email</label>
         <input
           required
@@ -61,8 +61,9 @@ export default {
       }
     },
     login: function () {
-      //const { username, password } = this;
-      this.$store.dispatch("AUTH_REQUEST").then(() => {
+      const { email, username, password } = this;
+      const user = { email, username, password };
+      this.$store.dispatch("AUTH_REQUEST", user).then(() => {
         this.$router.push("/");
       });
     },

@@ -1,11 +1,11 @@
 <template>
   <div class="home">
     <CreatePost />
-    <Post 
-    v-for="post in posts"
-    :title="post.title"
-    :textContent="post.textContent"
-    :key="post.id"
+    <Post
+      v-for="post in posts"
+      :title="post.title"
+      :textContent="post.textContent"
+      :key="post.id"
     />
   </div>
 </template>
@@ -14,7 +14,7 @@
 // @ is an alias to /src
 import CreatePost from "../components/createPost.vue";
 import Post from "../components/Post";
-import pApi from "../gateways/post";
+//import pApi from "../gateways/post";
 export default {
   name: "Home",
   components: {
@@ -28,15 +28,6 @@ export default {
   },
   methods: {},
   computed: {},
-  beforeCreate: function () {
-    //get all posts
-    pApi
-      .getAllPosts()
-      .then((res) => {
-        this.posts = res;
-      })
-      .catch((error) => console.log(error));
-    console.log(this.posts);
-  },
+  beforeCreate: function () {},
 };
 </script>

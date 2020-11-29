@@ -20,6 +20,7 @@ module.exports = (sequelize) => {
         },
         isAdmin: {
             type: DataTypes.BOOLEAN,
+            defaultValue: false
         },
         id: {
             type: DataTypes.INTEGER,

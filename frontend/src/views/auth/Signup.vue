@@ -38,7 +38,7 @@ export default {
       auth
         .signup({ email, username, password })
         .then(() => {
-          this.$router.push("/");
+          this.$router.push("/login");
         })
         .catch((error) => {
           console.log(`signup error: ${error}`);
