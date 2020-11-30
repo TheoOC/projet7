@@ -14,7 +14,7 @@
 // @ is an alias to /src
 import CreatePost from "../components/createPost.vue";
 import Post from "../components/Post";
-//import pApi from "../gateways/post";
+import pApi from "../gateways/post";
 export default {
   name: "Home",
   components: {
@@ -28,6 +28,17 @@ export default {
   },
   methods: {},
   computed: {},
-  beforeCreate: function () {},
+  beforeCreate: function () {
+    pApi
+      .getAllPosts()
+      .then((res) => {
+        console.log("beforeCreate called");
+        res.data.forEach((post) => {
+          this.posts.unshift(post);
+        });
+        console.log(res);
+      })
+      .catch(() => {});
+  },
 };
 </script>

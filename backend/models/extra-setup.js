@@ -1,6 +1,6 @@
 function applyExtraSetup(sequelize) {
 
-    sequelize.sync({ alter: true })
+    sequelize.sync({ force: true })
         .then(() => {
             console.log("synced all models")
         })
@@ -44,7 +44,7 @@ function applyExtraSetup(sequelize) {
             });
         })
         .then(() => {
-            sequelize.sync({ alter: true }).then(() => {
+            sequelize.sync({ force: true }).then(() => {
                 console.log("applied associations");
             })
                 .catch((error) => {

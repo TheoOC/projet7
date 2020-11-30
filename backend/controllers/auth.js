@@ -19,7 +19,7 @@ exports.login = (req, res, next) => {
     usernameQ = req.body.username;
     if (usernameQ == null) { usernameQ = "" };
     if (emailQ == null) { emailQ = "" };
-   
+
     User.findOne({
         where: {
             [Op.or]: [
@@ -58,6 +58,7 @@ exports.login = (req, res, next) => {
 };
 exports.signup = (req, res, next) => {
     //check if username and email is already in the database
+    console.log("----------------------" + req.body);
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
             //create instance and save it to database with create instead of build and save

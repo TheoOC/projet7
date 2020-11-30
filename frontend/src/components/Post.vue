@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <h3>Title: {{ title }}</h3>
     <p>content: {{ textContent }}</p>
   </div>
@@ -16,4 +16,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.container {
+  border: 5px solide red;
+}
 </style>

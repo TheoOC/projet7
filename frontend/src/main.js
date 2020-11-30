@@ -10,6 +10,7 @@ const token = localStorage.getItem('user-token')
 if (token) {
   axios.defaults.headers.common['Authorization'] = token
   console.log(`auto logged in: authorization header: ${axios.defaults.headers.common['Authorization']}`);
+  console.log(`user id: ${store.getters.getUserId}`)
 }
 
 new Vue({
