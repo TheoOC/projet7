@@ -1,0 +1,1 @@
+//check if user id in token is the owner of the post or an admin

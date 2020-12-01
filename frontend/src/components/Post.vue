@@ -17,6 +17,6 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  border: 5px solide red;
+  border: 5px solid red;
 }
 </style>

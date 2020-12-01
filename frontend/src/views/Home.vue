@@ -29,10 +29,10 @@ export default {
   methods: {},
   computed: {},
   beforeCreate: function () {
+    console.log("beforeCreate called");
     pApi
       .getAllPosts()
       .then((res) => {
-        console.log("beforeCreate called");
         res.data.forEach((post) => {
           this.posts.unshift(post);
         });
