@@ -3,9 +3,11 @@ const sequelize = require('../database');
 const User = require('../models/User.model')(sequelize);
 
 exports.getUser = (req, res, next) => {
+    console.log(`user_id ---------> ${req.params.user_id}`);
+    const idQ = parseInt(req.params.user_id);
     User.findOne({
         where: {
-            id: req.params.id
+            id: idQ
         }
     })
         .then((user) => {

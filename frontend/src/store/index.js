@@ -26,11 +26,11 @@ export default new Vuex.Store({
     AUTH_REQUEST: (state) => {
       state.auth.status = 'loading'
     },
-    AUTH_SUCCESS: (state, token, uid) => {
+    AUTH_SUCCESS: (state, token) => {
       state.auth.status = 'success';
       //state.user.token = token;
       Vue.set(state.user, 'token', token);
-      Vue.set(state.user, 'userId', uid);
+      Vue.set(state.user, 'userId', localStorage.getItem('user-id'));
       //state.user.userId = localStorage.getItem('user-id');
     },
     AUTH_ERROR: (state) => {
@@ -62,7 +62,7 @@ export default new Vuex.Store({
           axios.defaults.headers.common['Authorization'] = token;
           console.log(`authorization header set: ${axios.defaults.headers.common['Authorization']}`);
 
-          commit("AUTH_SUCCESS", token, uid);
+          commit("AUTH_SUCCESS", token);
           resolve(res);
         }).catch(() => {
           reject('error');

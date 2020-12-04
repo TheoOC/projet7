@@ -10,10 +10,8 @@ exports.createPost = (req, res, next) => {
         UserId: req.body.userId
     }).then(() => {
         res.status(200).json({ message: "post created" });
-        console.log('post success');
     })
         .catch((error) => {
-            console.log('post failed');
             res.status(400).json({ error });
         });
 };
@@ -24,11 +22,25 @@ exports.getAllPosts = (req, res, next) => {
             res.status(200).json(posts);
         })
         .catch((error) => { res.status(400).json({ error }) });
-}
-exports.modifyPost = (req, res, next) => {
+};
 
-}
 exports.getPost = (req, res, next) => {
+    console.log(`get post: id ===========> ${req.params.post_id}`);
+    const idQ = parseInt(req.params.post_id);
+    Post.findOne({
+        where: {
+            id: idQ
+        }
+    })
+        .then((post) => {
+            res.status(200).json({ post });
+        })
+        .catch((err) => {
+            res.status(400).json({ err });
+        });
+}
+
+exports.modifyPost = (req, res, next) => {
 
 }
 exports.deletePost = (req, res, next) => {
