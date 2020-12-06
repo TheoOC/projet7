@@ -27,5 +27,12 @@ exports.modifyUser = (req, res, next) => {
 
 }
 exports.deleteUser = (req, res, next) => {
-
+    idQ = parseInt(req.params.user_id);
+    User.destroy({
+        where: {
+            id: idQ
+        }
+    })
+        .then(() => { res.status(200).json({ message: "deleted user" }) })
+        .catch((error) => { res.status(400) });
 };
