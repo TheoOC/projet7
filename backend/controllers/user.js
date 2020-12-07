@@ -23,7 +23,7 @@ exports.getAllUsers = (req, res, next) => {
         })
         .catch(error => res.status(400).json({ error }));
 }
-exports.modifyUser = (req, res, next) => {
+exports.updateUser = (req, res, next) => {
 
 }
 exports.deleteUser = (req, res, next) => {
@@ -34,5 +34,5 @@ exports.deleteUser = (req, res, next) => {
         }
     })
         .then(() => { res.status(200).json({ message: "deleted user" }) })
-        .catch((error) => { res.status(400) });
+        .catch((error) => { res.status(400).json({ error }) });
 };

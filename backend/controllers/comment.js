@@ -5,7 +5,7 @@ const Comment = require('../models/Comment.model')(sequelize);
 exports.createComment = (req, res, next) => {
 
 }
-exports.modifyComment = (req, res, next) => {
+exports.updateComment = (req, res, next) => {
 
 }
 exports.getComment = (req, res, next) => {

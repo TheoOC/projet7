@@ -59,7 +59,7 @@ export default new Vuex.Store({
           console.log("uid====> " + uid);
 
           //set authorization header to token
-          axios.defaults.headers.common['Authorization'] = token;
+          axios.defaults.headers.common['Authorization'] = 'token ' + token;
           console.log(`authorization header set: ${axios.defaults.headers.common['Authorization']}`);
 
           commit("AUTH_SUCCESS", token);

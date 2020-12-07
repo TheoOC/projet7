@@ -7,6 +7,7 @@
       </div>
       <div v-else>
         <router-link to="/">Home</router-link>
+        <router-link to="/account">Account</router-link>
         <Logout />
       </div>
     </nav>

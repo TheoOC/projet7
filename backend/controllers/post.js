@@ -40,9 +40,16 @@ exports.getPost = (req, res, next) => {
         });
 }
 
-exports.modifyPost = (req, res, next) => {
+exports.updatePost = (req, res, next) => {
 
 }
 exports.deletePost = (req, res, next) => {
-
+    const postQ = parseInt(req.params.post_id);
+    Post.destroy({
+        where: {
+            id: postQ
+        }
+    })
+        .then(() => { res.status(200).json({ message: 'user post deleted' }) })
+        .catch((error) => { res.status(400).json({ error }) });
 }
