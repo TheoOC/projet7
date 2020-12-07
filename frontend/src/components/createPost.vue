@@ -36,15 +36,10 @@ export default {
       textContent: "",
     };
   },
-  computed: {
-    getUserId() {
-      return store.getters.getUserId;
-    },
-  },
   methods: {
     createPost: function () {
       const { title, textContent } = this;
-      const userId = this.getUserId;
+      const userId = store.getters.getUserId;
       const post = { title, textContent, userId };
       console.log(JSON.stringify(post));
       Post.createPost(post)

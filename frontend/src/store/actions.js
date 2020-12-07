@@ -17,7 +17,7 @@ const AUTH_REQUEST = ({ commit }, user) => {
             console.log("uid====> " + uid);
 
             //set authorization header to token
-            axios.defaults.headers.common['Authorization'] = 'token ' + token;
+            axios.defaults.headers.common = { 'Authorization': `Bearer ${token}` };
             console.log(`authorization header set: ${axios.defaults.headers.common['Authorization']}`);
 
             commit("AUTH_SUCCESS", token);
