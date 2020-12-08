@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <createPost />
+    <createPost v-on:get-all-posts="setAllPosts" />
     <postPreview v-for="post in posts" v-bind:post="post" :key="post.id" />
   </div>
 </template>
@@ -21,19 +21,28 @@ export default {
       posts: [],
     };
   },
-  methods: {},
-  computed: {},
-  beforeCreate: function () {
-    console.log("beforeCreate called");
-    pApi
-      .getAllPosts()
-      .then((res) => {
-        res.data.forEach((post) => {
-          this.posts.unshift(post);
+  methods: {
+    setAllPosts: function () {
+      pApi
+        .getAllPosts()
+        .then((res) => {
+          //reset posts
+          this.posts.splice(0, this.posts.length);
+
+          res.data.forEach((post) => {
+            this.posts.unshift(post);
+          });
+          console.log(res);
+        })
+        .catch((error) => {
+          console.log(`${error}`);
         });
-        console.log(res);
-      })
-      .catch(() => {});
+    },
+  },
+  computed: {},
+  created: function () {
+    console.log("beforeCreate called");
+    this.setAllPosts();
   },
 };
 </script>

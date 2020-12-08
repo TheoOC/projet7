@@ -3,14 +3,17 @@
     <h2>Title: {{ post.title }}</h2>
     <p>Content: {{ post.textContent }}</p>
     <p>post id: {{ this.$route.params.post_id }}</p>
+    <createComment />
   </div>
 </template>
 
 <script>
 import Vue from "vue";
 import pApi from "../gateways/post";
+import createComment from "../components/createComment";
 
 export default {
+  components: { createComment },
   name: "Post",
   data: function () {
     return {
@@ -42,7 +45,6 @@ export default {
   created: function () {
     this.getPost();
     //get all comments of post
-    
   },
 };
 </script>

@@ -1,6 +1,7 @@
 const sequelize = require('../database');
 
 const User = require('../models/User.model')(sequelize);
+const Comment = require('../models/Comment.model')(sequelize);
 
 exports.getUser = (req, res, next) => {
     console.log(`user_id ---------> ${req.params.user_id}`);
@@ -14,7 +15,7 @@ exports.getUser = (req, res, next) => {
             res.status(200).json(user);
         })
         .catch(error => res.status(400).json({ error }));
-}
+};
 exports.getAllUsers = (req, res, next) => {
     console.log("get all users");
     User.findAll()
@@ -22,10 +23,24 @@ exports.getAllUsers = (req, res, next) => {
             res.status(200).json(users);
         })
         .catch(error => res.status(400).json({ error }));
-}
+};
+
+exports.getAllCommentsOfUser = (req, res, next) => {
+    const userQ = parseInt(req.params.user_id);
+    Comment.findAll({
+        where: {
+            UserId: userQ
+        }
+    })
+        .then((comments) => {
+            res.status(200).json(comments);
+        })
+        .catch(error => res.status(400).json({ error }));
+
+};
 exports.updateUser = (req, res, next) => {
 
-}
+};
 exports.deleteUser = (req, res, next) => {
     idQ = parseInt(req.params.user_id);
     User.destroy({
@@ -35,4 +50,18 @@ exports.deleteUser = (req, res, next) => {
     })
         .then(() => { res.status(200).json({ message: "deleted user" }) })
         .catch((error) => { res.status(400).json({ error }) });
+};
+
+exports.getAllCommentsOfUser = (req, res, next) => {
+    const userQ = parseInt(req.params.user_id);
+    Comment.findAll({
+        where: {
+            UserId: userQ
+        }
+    })
+        .then((comments) => {
+            res.status(200).json(comments);
+        })
+        .catch(error => res.status(400).json({ error }));
+
 };

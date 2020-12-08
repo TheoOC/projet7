@@ -45,10 +45,13 @@ export default {
       Post.createPost(post)
         .then(() => {
           console.log("successfully called create Post");
+          this.$emit("get-all-posts");
         })
         .catch((error) => {
           console.log(`failed to call create post: ${error}`);
         });
+
+      //update parent component (Home.vue)
     },
   },
 };

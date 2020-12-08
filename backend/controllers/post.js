@@ -1,6 +1,20 @@
 const sequelize = require('../database');
 
 const Post = require('../models/Post.model')(sequelize);
+const Comment = require('../models/Comment.model')(sequelize);
+
+exports.getAllCommentsOfPost = (req, res, next) => {
+    const postQ = parseInt(req.params.post_id);
+    Comment.findAll({
+        where: {
+            PostId: postQ
+        }
+    })
+        .then((comments) => {
+            res.status(200).json(comments);
+        })
+        .catch(error => res.status(400).json({ error }));
+};
 
 exports.createPost = (req, res, next) => {
     //create post
@@ -38,11 +52,11 @@ exports.getPost = (req, res, next) => {
         .catch((err) => {
             res.status(400).json({ err });
         });
-}
+};
 
 exports.updatePost = (req, res, next) => {
+};
 
-}
 exports.deletePost = (req, res, next) => {
     const postQ = parseInt(req.params.post_id);
     Post.destroy({
@@ -52,4 +66,4 @@ exports.deletePost = (req, res, next) => {
     })
         .then(() => { res.status(200).json({ message: 'user post deleted' }) })
         .catch((error) => { res.status(400).json({ error }) });
-}
+};

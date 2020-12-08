@@ -28,6 +28,6 @@ app.use(bodyParser.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/post', postRoutes);
-app.use('/api/post/:post_id/comment', commentRoutes);
+app.use('/api/comment', commentRoutes);
 
 module.exports = app;

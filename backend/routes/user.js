@@ -10,6 +10,8 @@ const router = express.Router();
 router.get('/:user_id', auth, userCtrl.getUser);
 router.get('/', auth, userCtrl.getAllUsers);
 
+router.get('/:user_id/comment', auth, userCtrl.getAllCommentsOfUser);
+
 router.put('/:user_id', auth, authUpdateUser, userCtrl.updateUser);
 router.delete('/:user_id', auth, authDeleteUser, userCtrl.deleteUser);
 
