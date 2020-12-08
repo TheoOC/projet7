@@ -7,10 +7,6 @@ module.exports = (sequelize) => {
             type: DataTypes.TEXT,
             allowNull: false,
         },
-        imageUrl: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -18,7 +14,7 @@ module.exports = (sequelize) => {
         }
     }, {
         timestamps: true,
-        
+
     });
 
     //Comment.associate = function (models) {

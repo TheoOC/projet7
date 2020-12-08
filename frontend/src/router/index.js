@@ -30,10 +30,9 @@ const routes = [
     beforeEnter: ifAuthenticated,
   },
   {
-    path: '/account',
-    name: 'Account',
-    component: () => import('../views/Account.vue'),
-    beforeEnter: ifAuthenticated,
+    path: '/signup',
+    name: 'Signup',
+    component: () => import('../views/auth/Signup.vue')
   },
   {
     path: '/login',
@@ -42,9 +41,16 @@ const routes = [
     beforeEnter: ifNotAuthenticated,
   },
   {
-    path: '/signup',
-    name: 'Signup',
-    component: () => import('../views/auth/Signup.vue')
+    path: '/account',
+    name: 'Account',
+    component: () => import('../views/Account.vue'),
+    beforeEnter: ifAuthenticated,
+  },
+  {
+    path: '/post/:post_id',
+    name: 'Post',
+    component: () => import('../views/Post.vue'),
+    beforeEnter: ifAuthenticated,
   }
 ]
 

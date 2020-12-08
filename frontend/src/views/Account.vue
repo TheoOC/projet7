@@ -1,6 +1,9 @@
 <template>
   <div>
-    <button>uid: {{ this.uid }}</button>
+    <p>email: {{ user.email }}</p>
+    <p>username: {{ user.username }}</p>
+    <p>user id: {{user.id}}</p>
+    <!--<p>{{}}</p>-->
   </div>
 </template>
 <script>
@@ -9,13 +12,19 @@ import uApi from "../gateways/user";
 export default {
   data: function () {
     return {
-      uid: "",
       user: {},
     };
   },
   created: function () {
-    this.uid = store.getters.getUserId;
-    uApi.getUserInfos(this.uid);
+    store.getters.getUserId;
+    uApi
+      .getUserInfos(store.getters.getUserId)
+      .then((user) => {
+        this.user = user;
+      })
+      .catch((error) => {
+        console.log(`${error}`);
+      });
   },
 };
 </script>
