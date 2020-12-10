@@ -1,7 +1,24 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const { applyExtraSetup } = require('./models/extra-setup');
+const mysql = require('mysql2');
 
-//add code to create database if it does not exist
+//create connection
+const connection = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: ""
+});
+//create the database if it is not already created
+connection.connect(function (err) {
+    if (err) throw err;
+    console.log("Connected");
+    connection.query(`CREATE DATABASE IF NOT EXISTS projet7;`, function (err, result) {
+        if (err) throw err;
+        console.log("Database created");
+    })
+})
+
+
 const sequelize = new Sequelize('projet7', 'root', '', {
     host: 'localhost',
     dialect: 'mysql'
