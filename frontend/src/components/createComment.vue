@@ -26,7 +26,20 @@ export default {
   methods: {
     createComment: function () {
       const { textContent } = this;
-      cApi.createComment(textContent);
+      const cData = {
+        textContent: textContent,
+        userId: this.$store.getters.getUserId,
+        postId: this.$route.params.post_id,
+      };
+      cApi
+        .createComment(cData)
+        .then(() => {
+          console.log("successfully called createComment");
+          this.$emit("get-all-comments");
+        })
+        .catch((error) => {
+          console.log(`failed to call createComment: ${error}`);
+        });
     },
   },
 };

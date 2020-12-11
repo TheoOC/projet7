@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <createPost v-on:get-all-posts="setAllPosts" />
+    <createPost v-on:get-all-posts="getAllPosts" />
     <postPreview v-for="post in posts" v-bind:post="post" :key="post.id" />
   </div>
 </template>
@@ -22,7 +22,7 @@ export default {
     };
   },
   methods: {
-    setAllPosts: function () {
+    getAllPosts: function () {
       pApi
         .getAllPosts()
         .then((res) => {
@@ -42,7 +42,7 @@ export default {
   computed: {},
   created: function () {
     console.log("beforeCreate called");
-    this.setAllPosts();
+    this.getAllPosts();
   },
 };
 </script>

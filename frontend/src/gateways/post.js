@@ -1,5 +1,20 @@
 const axios = require('axios');
 
+exports.getAllCommentsOfPost = (post_id) => {
+    return new Promise((resolve, reject) => {
+        axios.get(`http://localhost:3000/api/post/${post_id}/comment`)
+            .then((res) => {
+                console.log(`got all comment of post: ${post_id}`);
+                resolve(res);
+            })
+            .catch((error) => {
+                console.log(`failed to get comments of post: ${post_id}`);
+                reject(error);
+            });
+    })
+
+}
+
 exports.getPost = (post_id) => {
     return new Promise((resolve, reject) => {
         axios.get(`http://localhost:3000/api/post/${post_id}`)
@@ -13,7 +28,7 @@ exports.getPost = (post_id) => {
                 reject(error)
             });
     })
-}
+};
 
 exports.createPost = (data) => {
     return new Promise((resolve, reject) => {
@@ -41,4 +56,4 @@ exports.getAllPosts = () => {
                 reject(error);
             });
     })
-}
+};
