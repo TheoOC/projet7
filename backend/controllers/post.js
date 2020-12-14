@@ -72,7 +72,7 @@ exports.updatePost = (req, res, next) => {
             //change post fields
             post.title = req.body.title;
             post.textContent = req.body.textContent;
-            //user model.save to update the instance
+            //use model.save to update the instance
             post.save().then(() => {
                 res.status(200).json({ message: "post updated" });
             }).catch((error) => {
@@ -90,5 +90,8 @@ exports.deletePost = (req, res, next) => {
         }
     })
         .then(() => { res.status(200).json({ message: 'post deleted' }) })
-        .catch((error) => { res.status(400).json({ error }) });
+        .catch((error) => {
+            console.log(`failed to delete post: ${error} `);
+            res.status(400).json({ error })
+        });
 };

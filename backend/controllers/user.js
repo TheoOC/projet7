@@ -39,8 +39,26 @@ exports.getAllCommentsOfUser = (req, res, next) => {
 
 };
 exports.updateUser = (req, res, next) => {
-
+    console.log(`in update user`);
+    const idQ = req.params.user_id
+    User.findOne({
+        where: {
+            id: idQ
+        }
+    })
+        .then((user) => {
+            console.log(`user to update found`)
+            //change username
+            user.username = req.body.username;
+            user.save().then(() => {
+                res.status(200).json({ message: "user updated" });
+            }).catch((error) => {
+                res.status(400).json({ error });
+            });
+        })
+        .catch((error) => { res.status(500).json({ error }) });
 };
+
 exports.deleteUser = (req, res, next) => {
     idQ = parseInt(req.params.user_id);
     User.destroy({

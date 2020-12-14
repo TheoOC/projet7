@@ -39,9 +39,9 @@ exports.updateComment = (req, res, next) => {
     })
         .then((comment) => {
             console.log(`post to update found`)
-            //change post fields
+            //change comment fields
             comment.textContent = req.body.textContent;
-            //user model.save to update the instance
+            //use model.save to update the instance
             comment.save().then(() => {
                 res.status(200).json({ message: "comment updated" });
             }).catch((error) => {
