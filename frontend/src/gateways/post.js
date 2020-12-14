@@ -4,7 +4,7 @@ exports.getAllCommentsOfPost = (post_id) => {
     return new Promise((resolve, reject) => {
         axios.get(`http://localhost:3000/api/post/${post_id}/comment`)
             .then((res) => {
-                console.log(`got all comment of post: ${post_id}`);
+                console.log(`got all comments of post: ${post_id}`);
                 resolve(res);
             })
             .catch((error) => {

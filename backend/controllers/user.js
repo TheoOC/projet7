@@ -69,17 +69,3 @@ exports.deleteUser = (req, res, next) => {
         .then(() => { res.status(200).json({ message: "deleted user" }) })
         .catch((error) => { res.status(400).json({ error }) });
 };
-
-exports.getAllCommentsOfUser = (req, res, next) => {
-    const userQ = parseInt(req.params.user_id);
-    Comment.findAll({
-        where: {
-            UserId: userQ
-        }
-    })
-        .then((comments) => {
-            res.status(200).json(comments);
-        })
-        .catch(error => res.status(400).json({ error }));
-
-};
