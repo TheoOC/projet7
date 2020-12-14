@@ -6,6 +6,7 @@
     <p>user id: {{ user.id }}</p>
   </div>
 </template>
+
 <script>
 export default {
   name: "display-account",

@@ -6,7 +6,7 @@
       <label for="username">username</label>
       <input
         required
-        v-model="user.username"
+        v-model="username"
         id="username"
         name="text"
         placeholder="new username"
@@ -25,12 +25,26 @@ export default {
   name: "edit-account",
   props: ["user"],
   data: function () {
-    return {};
+    return {
+      username: "",
+    };
   },
   methods: {
     setDefaultInputValues: function () {
-      document.getElementById("username").defaultValue = this.user.username;
-      console.log(`default input values set`);
+      const user_id = store.getters.getUserId;
+      uApi
+        .getUserInfos(user_id)
+        .then((user) => {
+          this.username = user.username;
+          document.getElementById("username").defaultValue = this.username;
+          console.log(`default input values set`);
+        })
+        .catch((err) => {
+          this.username = "";
+          console.log(
+            `ther was an error getting the userInfos form the api: ${err}`
+          );
+        });
     },
     editAccount: function () {
       const user_id = store.getters.getUserId;
@@ -57,19 +71,9 @@ export default {
           `failed to call delete user: ${err}`;
         });
     },
-    created: function () {
-      console.log("in created from edit account");
-      uApi
-        .getUserInfos(store.getters.getUserId)
-        .then((user) => {
-          this.user = user;
-        })
-        .catch((error) => {
-          console.log(`${error}`);
-        });
-
-      this.setDefaultInputValues();
-    },
+  },
+  mounted: function () {
+    this.setDefaultInputValues();
   },
 };
 </script>
