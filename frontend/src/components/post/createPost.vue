@@ -26,8 +26,8 @@
 </template>
 
 <script>
-import Post from "../gateways/post";
-import store from "../store/index";
+import Post from "../../gateways/post";
+import store from "../../store/index";
 
 export default {
   data: function () {

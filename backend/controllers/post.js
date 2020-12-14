@@ -1,4 +1,5 @@
 const sequelize = require('../database');
+const UserModel = require('../models/User.model');
 
 const Post = require('../models/Post.model')(sequelize);
 const Comment = require('../models/Comment.model')(sequelize);
@@ -11,6 +12,7 @@ exports.getAllCommentsOfPost = (req, res, next) => {
         }
     })
         .then((comments) => {
+            console.log(`comments--------------------- ${JSON.stringify(comments)}`);
             res.status(200).json(comments);
         })
         .catch(error => res.status(400).json({ error }));
@@ -22,10 +24,12 @@ exports.createPost = (req, res, next) => {
         title: req.body.title,
         textContent: req.body.textContent,
         UserId: req.body.userId
-    }).then(() => {
-        res.status(200).json({ message: "post created" });
     })
+        .then(() => {
+            res.status(200).json({ message: "post created" });
+        })
         .catch((error) => {
+            console.log(`failed to create post: ${error}`);
             res.status(400).json({ error });
         });
 };
@@ -55,6 +59,27 @@ exports.getPost = (req, res, next) => {
 };
 
 exports.updatePost = (req, res, next) => {
+    //find the post
+    console.log(`in update post`);
+    const idQ = req.params.post_id
+    Post.findOne({
+        where: {
+            id: idQ
+        }
+    })
+        .then((post) => {
+            console.log(`post to update found`)
+            //change post fields
+            post.title = req.body.title;
+            post.textContent = req.body.textContent;
+            //user model.save to update the instance
+            post.save().then(() => {
+                res.status(200).json({ message: "post updated" });
+            }).catch((error) => {
+                res.status(400).json({ error });
+            });
+        })
+        .catch((error) => { res.status(500).json({ error }) });
 };
 
 exports.deletePost = (req, res, next) => {
@@ -64,6 +89,6 @@ exports.deletePost = (req, res, next) => {
             id: postQ
         }
     })
-        .then(() => { res.status(200).json({ message: 'user post deleted' }) })
+        .then(() => { res.status(200).json({ message: 'post deleted' }) })
         .catch((error) => { res.status(400).json({ error }) });
 };

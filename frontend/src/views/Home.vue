@@ -7,8 +7,8 @@
 
 <script>
 // @ is an alias to /src
-import createPost from "../components/createPost.vue";
-import postPreview from "../components/postPreview";
+import createPost from "../components/post/createPost.vue";
+import postPreview from "../components/post/postPreview";
 import pApi from "../gateways/post";
 export default {
   name: "Home",

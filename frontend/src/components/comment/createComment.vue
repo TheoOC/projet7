@@ -15,7 +15,7 @@
   </div>
 </template>
 <script>
-import cApi from "../gateways/comment";
+import cApi from "../../gateways/comment";
 
 export default {
   data: function () {

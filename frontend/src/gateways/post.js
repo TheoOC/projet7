@@ -57,3 +57,31 @@ exports.getAllPosts = () => {
             });
     })
 };
+
+exports.updatePost = (data, post_id) => {
+    return new Promise((resolve, reject) => {
+        axios.put(`http://localhost:3000/api/post/${post_id}`, data)
+            .then(() => {
+                console.log(`updated post: ${post_id}`);
+                resolve();
+            })
+            .catch((err) => {
+                console.log(`failed to update post: ${post_id}`);
+                reject(err);
+            });
+    })
+};
+
+exports.deletePost = (post_id) => {
+    return new Promise((resolve, reject) => {
+        axios.delete(`http://localhost:3000/api/post/${post_id}`)
+            .then(() => {
+                console.log(`deleted post`);
+                resolve();
+            })
+            .catch((err) => {
+                console.log(`failed to delete post`);
+                reject(err);
+            });
+    })
+}

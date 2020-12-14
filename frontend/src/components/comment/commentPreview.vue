@@ -2,6 +2,7 @@
   <div class="container">
     <h3>{{ comment }}</h3>
     <p>{{ comment.textContent }}</p>
+    <button @click="redirectToEditComment">edit comment</button>
   </div>
 </template>
 
@@ -11,6 +12,11 @@ export default {
   props: ["comment"],
   data: function () {
     return {};
+  },
+  methods: {
+    redirectToEditComment: function () {
+      this.$router.push(`/comment/${this.comment.id}/edit`);
+    },
   },
 };
 </script>

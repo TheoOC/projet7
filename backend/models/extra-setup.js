@@ -1,4 +1,7 @@
+
 function applyExtraSetup(sequelize) {
+    console.log("in extra setup");
+
 
     sequelize.sync({ force: true })
         .then(() => {
@@ -44,9 +47,10 @@ function applyExtraSetup(sequelize) {
             });
         })
         .then(() => {
-            sequelize.sync({ force: true }).then(() => {
-                console.log("applied associations");
-            })
+            sequelize.sync({ force: true })
+                .then(() => {
+                    console.log("applied associations");
+                })
                 .catch((error) => {
                     console.log("failed to apply associations" + error);
                 })

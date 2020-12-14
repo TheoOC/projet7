@@ -51,6 +51,20 @@ const routes = [
     name: 'Post',
     component: () => import('../views/Post.vue'),
     beforeEnter: ifAuthenticated,
+  },
+  {
+    //need to add if post owner
+    path: '/post/:post_id/edit',
+    name: 'EditPost',
+    component: () => import('../views/EditPost.vue'),
+    beforeEnter: ifAuthenticated,
+  },
+  {
+    //need to add if comment owner
+    path: '/comment/:comment_id/edit',
+    name: 'EditComment',
+    component: () => import('../views/EditComment.vue'),
+    beforeEnter: ifAuthenticated,
   }
 ]
 

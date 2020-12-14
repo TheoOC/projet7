@@ -3,6 +3,7 @@
     <h2>Title: {{ post.title }}</h2>
     <p>Content: {{ post.textContent }}</p>
     <p>post id: {{ this.$route.params.post_id }}</p>
+    <button @click="redirectToEditPost">edit post</button>
     <createComment v-on:get-all-comments="getAllComments" />
     <commentPreview
       v-for="comment in comments"
@@ -15,8 +16,8 @@
 <script>
 import Vue from "vue";
 import pApi from "../gateways/post";
-import createComment from "../components/createComment";
-import commentPreview from "../components/commentPreview";
+import createComment from "../components/comment/createComment";
+import commentPreview from "../components/comment/commentPreview";
 
 export default {
   name: "Post",
@@ -55,12 +56,13 @@ export default {
           console.log(`${error}`);
         });
     },
+    redirectToEditPost: function () {
+      this.$router.push(`/post/${this.post.id}/edit`);
+    },
   },
   watch: {
     //watch for post id changes in url
-    $route(to, from) {
-      console.log(`to: ${to}`);
-      console.log(`from: ${from}`);
+    $route() {
       //get post from api
       this.getPost();
     },

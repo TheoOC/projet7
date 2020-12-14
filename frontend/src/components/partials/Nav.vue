@@ -6,8 +6,8 @@
         <router-link to="/signup">Signup</router-link>
       </div>
       <div v-else>
-        <router-link to="/">Home</router-link> | 
-        <router-link to="/account">Account</router-link> | 
+        <router-link to="/">Home</router-link> |
+        <router-link to="/account">Account</router-link> |
         <Logout />
       </div>
     </nav>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import Logout from "../../components/logout";
+import Logout from "../../components/auth/logout";
 
 export default {
   name: "Nav",
