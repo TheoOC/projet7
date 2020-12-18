@@ -20,6 +20,13 @@
         placeholder="write some text"
       ></textarea>
 
+      <input
+        type="file"
+        accept="image/*"
+        @change="uploadImage($event)"
+        id="file-input"
+      />
+
       <input type="submit" value="Submit" />
     </form>
   </div>
@@ -37,6 +44,24 @@ export default {
     };
   },
   methods: {
+    uploadImage(event) {
+      //TEMPORARY CODE TO TEST
+
+      //const URL = "http://foobar.com/upload";
+
+      let data = new FormData();
+      data.append("name", "my-picture");
+      data.append("file", event.target.files[0]);
+      //let config = {
+      //  header: {
+      //    "Content-Type": "image/png",
+      //  },
+      //};
+      //axios.put(URL, data, config).then((response) => {
+      //  console.log("image upload response > ", response);
+      //});
+    },
+
     createPost: function () {
       const { title, textContent } = this;
       const userId = store.getters.getUserId;

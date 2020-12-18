@@ -24,6 +24,12 @@ const ifAuthenticated = (to, from, next) => {
 
 const routes = [
   {
+    path: '/error',
+    name: 'Error',
+    component: () => import('../views/Error.vue'),
+    props: true,
+  },
+  {
     path: '/',
     name: 'Home',
     component: () => import('../views/Home.vue'),

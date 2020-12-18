@@ -1,5 +1,4 @@
 const sequelize = require('../database');
-const UserModel = require('../models/User.model');
 
 const Post = require('../models/Post.model')(sequelize);
 const Comment = require('../models/Comment.model')(sequelize);

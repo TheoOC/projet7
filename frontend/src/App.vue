@@ -21,7 +21,10 @@ export default {
           // if you ever get an unauthorized, logout the user
           this.$store.dispatch("AUTH_LOGOUT");
           // you can also redirect to /login if needed !
-          this.$router.push("/login");
+          this.$router.push({
+            name: "Error",
+            params: { errorMessage: "401 Unauthorized", disconnect: true },
+          });
           resolve();
         }
         reject(err);
