@@ -3,6 +3,7 @@
     <h2>Title: {{ post.title }}</h2>
     <p>Content: {{ post.textContent }}</p>
     <p>post id: {{ this.$route.params.post_id }}</p>
+    <p>{{ post }}</p>
     <button @click="redirectToEditPost">edit post</button>
     <createComment v-on:get-all-comments="getAllComments" />
     <commentPreview

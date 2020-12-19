@@ -14,7 +14,10 @@ exports.getAllCommentsOfPost = (req, res, next) => {
             console.log(`comments--------------------- ${JSON.stringify(comments)}`);
             res.status(200).json(comments);
         })
-        .catch(error => res.status(400).json({ error }));
+        .catch(error => {
+            console.log(`failed get all comments of post: ${error}`);
+            res.status(400).json({ error })
+        });
 };
 
 exports.createPost = (req, res, next) => {

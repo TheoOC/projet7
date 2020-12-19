@@ -11,11 +11,13 @@ function applyExtraSetup(sequelize) {
             const { Comment, User, Post } = sequelize.models;
             console.log('creating associations');
             Comment.belongsTo(User, {
+                onDelete: 'cascade',
                 foreignKey: {
                     allowNull: false
                 }
             });
             Comment.belongsTo(Post, {
+                onDelete: 'cascade',
                 foreignKey: {
                     allowNull: false
                 }
@@ -41,6 +43,7 @@ function applyExtraSetup(sequelize) {
                 }
             });
             Post.belongsTo(User, {
+                onDelete: 'cascade',
                 foreignKey: {
                     allowNull: false
                 }
