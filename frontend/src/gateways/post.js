@@ -2,7 +2,7 @@ const axios = require('axios');
 
 exports.getAllCommentsOfPost = (post_id) => {
     return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:3000/api/post/${post_id}/comment`)
+        axios.get(`http://localhost:3000/api/comment/post/${post_id}`)
             .then((res) => {
                 console.log(`got all comments of post: ${post_id}`);
                 resolve(res);

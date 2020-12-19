@@ -1,7 +1,6 @@
 const sequelize = require('../database');
 
 const User = require('../models/User.model')(sequelize);
-const Comment = require('../models/Comment.model')(sequelize);
 
 exports.getUser = (req, res, next) => {
     console.log(`user_id ---------> ${req.params.user_id}`);
@@ -25,19 +24,6 @@ exports.getAllUsers = (req, res, next) => {
         .catch(error => res.status(400).json({ error }));
 };
 
-exports.getAllCommentsOfUser = (req, res, next) => {
-    const userQ = parseInt(req.params.user_id);
-    Comment.findAll({
-        where: {
-            UserId: userQ
-        }
-    })
-        .then((comments) => {
-            res.status(200).json(comments);
-        })
-        .catch(error => res.status(400).json({ error }));
-
-};
 exports.updateUser = (req, res, next) => {
     console.log(`in update user`);
     const idQ = req.params.user_id

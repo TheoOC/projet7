@@ -17,10 +17,10 @@ module.exports = (sequelize) => {
 
     });
 
-    //Comment.associate = function (models) {
-    //    Comment.belongsTo(User);
-    //    Comment.belongsTo(Post);
-    //};
+   //Comment.associate = function (models) {
+   //    Comment.belongsTo(User);
+   //    Comment.belongsTo(Post);
+   //};
 
 
     //Comment.sync({ force: true })

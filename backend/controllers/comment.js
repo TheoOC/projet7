@@ -2,6 +2,37 @@ const sequelize = require('../database');
 
 const Comment = require('../models/Comment.model')(sequelize);
 
+
+exports.getAllCommentsOfPost = (req, res, next) => {
+    const postQ = parseInt(req.params.post_id);
+    Comment.findAll({
+        where: {
+            PostId: postQ
+        }
+    })
+        .then((comments) => {
+            console.log(`comments--------------------- ${JSON.stringify(comments)}`);
+            res.status(200).json(comments);
+        })
+        .catch(error => {
+            console.log(`failed get all comments of post: ${error}`);
+            res.status(400).json({ error })
+        });
+};
+
+exports.getAllCommentsOfUser = (req, res, next) => {
+    const userQ = parseInt(req.params.user_id);
+    Comment.findAll({
+        where: {
+            UserId: userQ
+        }
+    })
+        .then((comments) => {
+            res.status(200).json(comments);
+        })
+        .catch(error => res.status(400).json({ error }));
+//
+};
 exports.getComment = (req, res, next) => {
     console.log(`get comment: id ===========> ${req.params.comment_id}`);
     const idQ = parseInt(req.params.comment_id);
@@ -28,7 +59,6 @@ exports.createComment = (req, res, next) => {
         .catch(error => { res.status(400).json({ error }) });
 
 }
-
 exports.updateComment = (req, res, next) => {
     console.log(`in update comment`);
     const idQ = req.params.comment_id

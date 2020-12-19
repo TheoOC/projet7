@@ -1,24 +1,6 @@
 const sequelize = require('../database');
 
 const Post = require('../models/Post.model')(sequelize);
-const Comment = require('../models/Comment.model')(sequelize);
-
-exports.getAllCommentsOfPost = (req, res, next) => {
-    const postQ = parseInt(req.params.post_id);
-    Comment.findAll({
-        where: {
-            PostId: postQ
-        }
-    })
-        .then((comments) => {
-            console.log(`comments--------------------- ${JSON.stringify(comments)}`);
-            res.status(200).json(comments);
-        })
-        .catch(error => {
-            console.log(`failed get all comments of post: ${error}`);
-            res.status(400).json({ error })
-        });
-};
 
 exports.createPost = (req, res, next) => {
     //create post
