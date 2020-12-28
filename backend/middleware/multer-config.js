@@ -7,7 +7,7 @@ const MIME_TYPES = {
 const storage = multer.diskStorage({
     //tell multer to store images in images folder
     destination: (req, file, callback) => {
-        callback(null, '../images');
+        callback(null, 'images');
     },
     //change name of file so there is no name conflict
     filename: (req, file, callback) => {
@@ -16,4 +16,4 @@ const storage = multer.diskStorage({
         callback(null, name + Date.now() + '.' + extension);
     }
 });
-module.exports = multer({ storage: storage }).any();
+module.exports = multer({ storage: storage }).single('image');

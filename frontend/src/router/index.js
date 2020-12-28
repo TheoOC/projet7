@@ -27,7 +27,7 @@ const routes = [
   {
     path: '/error',
     name: 'Error',
-    component: () => import('../views/Error.vue'),
+    component: () => import('../views/error/Error.vue'),
     props: true,
   },
   {
@@ -50,27 +50,28 @@ const routes = [
   {
     path: '/account',
     name: 'Account',
-    component: () => import('../views/Account.vue'),
+    component: () => import('../views/user/Account.vue'),
     beforeEnter: ifAuthenticated,
   },
   {
     path: '/post/:post_id',
     name: 'Post',
-    component: () => import('../views/Post.vue'),
+    component: () => import('../views/post/Post.vue'),
     beforeEnter: ifAuthenticated,
   },
   {
     //need to add if post owner
     path: '/post/:post_id/edit',
     name: 'EditPost',
-    component: () => import('../views/EditPost.vue'),
+    component: () => import('../views/post/EditPost.vue'),
     beforeEnter: ifAuthenticated,
   },
   {
     //need to add if comment owner
     path: '/comment/:comment_id/edit',
     name: 'EditComment',
-    component: () => import('../views/EditComment.vue'),
+    component: () => import('../views/comment/EditComment.vue'),
+    props: true,
     beforeEnter: ifAuthenticated,
   }
 ]

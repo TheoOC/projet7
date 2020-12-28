@@ -4,7 +4,9 @@
     <p>Content: {{ post.textContent }}</p>
     <p>post id: {{ this.$route.params.post_id }}</p>
     <p>{{ post }}</p>
-    <button @click="redirectToEditPost">edit post</button>
+    <div v-if="hasPermission">
+      <button @click="redirectToEditPost">edit post</button>
+    </div>
     <createComment v-on:get-all-comments="getAllComments" />
     <commentPreview
       v-for="comment in comments"
@@ -16,9 +18,9 @@
 
 <script>
 import Vue from "vue";
-import pApi from "../gateways/post";
-import createComment from "../components/comment/createComment";
-import commentPreview from "../components/comment/commentPreview";
+import pApi from "../../gateways/post";
+import createComment from "../../components/comment/createComment";
+import commentPreview from "../../components/comment/commentPreview";
 
 export default {
   name: "Post",
@@ -28,6 +30,14 @@ export default {
       post: {},
       comments: [],
     };
+  },
+  computed: {
+    hasPermission: function () {
+      return (
+        this.$store.getters.getUserId === this.post.UserId ||
+        this.$store.getters.isAdmin
+      );
+    },
   },
   methods: {
     getPost: function () {

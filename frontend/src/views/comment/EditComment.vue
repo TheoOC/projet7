@@ -9,7 +9,7 @@
         name="text"
         placeholder="write some text"
       ></textarea>
-
+      <h3>comment from post: {{ postId }} </h3>
       <input type="submit" value="Submit" />
     </form>
     <button @click="deleteComment">delete comment</button>
@@ -17,10 +17,16 @@
 </template>
 
 <script>
-import cApi from "../gateways/comment";
+import cApi from "../../gateways/comment";
 
 export default {
   name: "EditComment",
+  props: {
+    postId: {
+      type: Number,
+      required: true,
+    },
+  },
   data: function () {
     return {
       textContent: "",
@@ -53,9 +59,11 @@ export default {
         .updateComment(comment, comment_id)
         .then(() => {
           console.log(`successfully called updateComment`);
+          this.$router.push(`/post/${this.postId}`);
         })
         .catch((err) => {
           console.log(`failed to call updateComment: ${err}`);
+          this.$router.push(`/post/${this.postId}`);
         });
     },
     deleteComment: function () {

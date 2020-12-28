@@ -2,20 +2,36 @@
   <div class="container">
     <h3>{{ comment }}</h3>
     <p>{{ comment.textContent }}</p>
-    <button @click="redirectToEditComment">edit comment</button>
+    <div v-if="hasPermission">
+      <button @click="redirectToEditComment">edit comment</button>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "commentPreview",
-  props: ["comment"],
+  props: { comment: { type: Object, required: true } },
   data: function () {
     return {};
   },
+  computed: {
+    hasPermission: function () {
+      return (
+        this.$store.getters.getUserId === this.comment.UserId ||
+        this.$store.getters.isAdmin
+      );
+    },
+  },
   methods: {
     redirectToEditComment: function () {
-      this.$router.push(`/comment/${this.comment.id}/edit`);
+      const url = this.comment.id;
+      //need to pass :comment_id as params because params are ignored if a path is specified
+      const pId = this.comment.PostId;
+      this.$router.push({
+        name: "EditComment",
+        params: { postId: pId, comment_id: url },
+      });
     },
   },
 };

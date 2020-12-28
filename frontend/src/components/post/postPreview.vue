@@ -4,6 +4,7 @@
     <h3>Title: {{ post.title }}</h3>
     <p>content: {{ post.textContent }}</p>
     <p>UserId that created the post: {{ post.UserId }}</p>
+    <p>{{ post.imageUrl }}</p>
     <img :src="post.imageUrl" />
   </div>
 </template>
@@ -11,7 +12,7 @@
 <script>
 export default {
   name: "postPreview",
-  props: ["post"],
+  props: { post: { type: Object, required: true } },
   data: function () {
     return {};
   },

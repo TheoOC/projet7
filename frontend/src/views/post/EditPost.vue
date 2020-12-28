@@ -20,6 +20,16 @@
         placeholder="write some text"
       ></textarea>
 
+      <input
+        type="file"
+        accept="image/*"
+        @change="uploadImage($event)"
+        id="file-input"
+      />
+      <div>
+        <img v-if="imageUrl" :src="imageUrl" />
+      </div>
+
       <input type="submit" value="Submit" />
     </form>
     <button @click="deletePost">delete Post</button>
@@ -27,7 +37,7 @@
 </template>
 
 <script>
-import pApi from "../gateways/post";
+import pApi from "../../gateways/post";
 
 export default {
   name: "EditPost",
@@ -36,9 +46,16 @@ export default {
       title: "",
       textContent: "",
       image: null,
+      imageUrl: null,
     };
   },
   methods: {
+    uploadImage(event) {
+      //save image
+      this.image = event.target.files[0];
+      //use imageUrl as blob to preview image
+      this.imageUrl = URL.createObjectURL(event.target.files[0]);
+    },
     setDefaultInputValues: function () {
       const post_id = this.$route.params.post_id;
       pApi
@@ -46,6 +63,7 @@ export default {
         .then((post) => {
           this.title = post.title;
           this.textContent = post.textContent;
+          this.imageUrl = post.imageUrl;
           document.getElementById("title").defaultValue = this.title;
           document.getElementById(
             "textContent"
@@ -68,9 +86,11 @@ export default {
         .updatePost(post, this.image, post_id)
         .then(() => {
           console.log(`successfully called updatePost`);
+          this.$router.push(`/post/${post_id}`);
         })
         .catch((err) => {
           console.log(`failed to call updatePost: ${err}`);
+          this.$router.push(`/post/${post_id}`);
         });
     },
     deletePost: function () {

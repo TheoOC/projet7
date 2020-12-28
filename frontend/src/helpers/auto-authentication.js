@@ -11,7 +11,9 @@ export default function setup() {
         axios.defaults.headers.common = { 'Authorization': `Bearer ${token}` };
         //check if userid in token is valid if not delete state variables with AUTH_LOGOUT
         store.dispatch("AUTH_AUTO", token)
-            .then(() => { })
+            .then(() => {
+                console.log(`auto login successfull`);
+            })
             .catch((error) => {
                 console.log(`failed to auto log in: ${error} clearing localStorage:`);
                 store.dispatch("AUTH_LOGOUT")

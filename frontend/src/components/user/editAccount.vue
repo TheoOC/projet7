@@ -23,7 +23,7 @@ import uApi from "../../gateways/user";
 
 export default {
   name: "edit-account",
-  props: ["user"],
+  props: { user: { type: Object, required: true } },
   data: function () {
     return {
       username: "",

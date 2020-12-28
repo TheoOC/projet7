@@ -10,7 +10,7 @@
 <script>
 export default {
   name: "display-account",
-  props: ["user"],
+  props: { user: { type: Object, require: true } },
   data: function () {
     return {};
   },

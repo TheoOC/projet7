@@ -10,7 +10,7 @@ const AUTH_AUTO = ({ commit }, token) => {
                 console.log(`auto logged in: authorization header: ${axios.defaults.headers.common['Authorization']}`);
 
                 //set user id
-                const uid = user.userId;
+                const uid = JSON.stringify(user.id);
                 localStorage.setItem('user-id', uid);
                 console.log(`uid====> ${uid}`);
 

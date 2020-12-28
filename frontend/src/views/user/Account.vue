@@ -7,11 +7,11 @@
   </div>
 </template>
 <script>
-import store from "../store/index";
-import uApi from "../gateways/user";
+import store from "../../store/index";
+import uApi from "../../gateways/user";
 
-import displayAccount from "../components/user/displayAccount";
-import editAccount from "../components/user/editAccount";
+import displayAccount from "../../components/user/displayAccount";
+import editAccount from "../../components/user/editAccount";
 
 export default {
   components: {
