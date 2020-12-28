@@ -4,6 +4,9 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 
+import interceptorSetup from './helpers/interceptors';
+interceptorSetup();
+
 Vue.config.productionTip = false
 
 const token = localStorage.getItem('user-token')

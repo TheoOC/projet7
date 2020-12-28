@@ -35,6 +35,7 @@ export default {
     return {
       title: "",
       textContent: "",
+      image: null,
     };
   },
   methods: {
@@ -64,7 +65,7 @@ export default {
       const { title, textContent } = this;
       const post = { title, textContent };
       pApi
-        .updatePost(post, post_id)
+        .updatePost(post, this.image, post_id)
         .then(() => {
           console.log(`successfully called updatePost`);
         })

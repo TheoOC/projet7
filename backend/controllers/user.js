@@ -15,6 +15,7 @@ exports.getUser = (req, res, next) => {
         })
         .catch(error => res.status(400).json({ error }));
 };
+
 exports.getAllUsers = (req, res, next) => {
     console.log("get all users");
     User.findAll()

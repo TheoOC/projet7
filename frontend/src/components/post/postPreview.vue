@@ -4,6 +4,7 @@
     <h3>Title: {{ post.title }}</h3>
     <p>content: {{ post.textContent }}</p>
     <p>UserId that created the post: {{ post.UserId }}</p>
+    <img :src="post.imageUrl" />
   </div>
 </template>
 

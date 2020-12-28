@@ -1,8 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
+const multer = require('multer');
+const upload = multer();
 
 const sequelize = require('./database');
-
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
@@ -22,9 +24,18 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(bodyParser.urlencoded({ extended: false }));
+// for parsing application/json
 app.use(bodyParser.json());
 
+// for parsing application/xwww-
+app.use(bodyParser.urlencoded({ extended: true }));
+//form-urlencoded
+
+// for parsing multipart/form-data
+//app.use(upload.array());
+
+//tell express to manage the images ressources statically 
+app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/post', postRoutes);

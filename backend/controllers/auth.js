@@ -30,7 +30,7 @@ exports.login = (req, res, next) => {
     })
         .then(user => {
             if (!user) {
-                console.log('user null');
+                console.log('user not found');
                 return res.status(401).json({ error: "USER NOT FOUND!!!" });
             }
             console.log('user not null');

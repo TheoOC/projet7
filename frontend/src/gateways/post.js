@@ -30,20 +30,6 @@ exports.getPost = (post_id) => {
     })
 };
 
-exports.createPost = (data) => {
-    return new Promise((resolve, reject) => {
-        axios.post('http://localhost:3000/api/post', data)
-            .then((res) => {
-                console.log(`created post: ${res}`);
-                resolve();
-            })
-            .catch((error) => {
-                console.log(`there was an error creating the post ${error}`);
-                reject(error);
-            })
-    })
-};
-
 exports.getAllPosts = () => {
     return new Promise((resolve, reject) => {
         axios.get('http://localhost:3000/api/post')
@@ -58,9 +44,40 @@ exports.getAllPosts = () => {
     })
 };
 
-exports.updatePost = (data, post_id) => {
+exports.createPost = (post, image) => {
     return new Promise((resolve, reject) => {
-        axios.put(`http://localhost:3000/api/post/${post_id}`, data)
+        const formData = new FormData();
+        formData.append('post', JSON.stringify(post));
+        formData.append('image', image);
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        };
+        axios.post('http://localhost:3000/api/post', formData, config)
+            .then((res) => {
+                console.log(`created post: ${JSON.stringify(res)}`);
+                resolve();
+            })
+            .catch((error) => {
+                console.log(`there was an error creating the post ${error}`);
+                reject(error);
+            })
+    })
+};
+
+
+exports.updatePost = (post, image, post_id) => {
+    return new Promise((resolve, reject) => {
+        const formData = new FormData()
+        formData.append('post', JSON.stringify(post));
+        formData.append('image', image);
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        };
+        axios.put(`http://localhost:3000/api/post/${post_id}`, formData, config)
             .then(() => {
                 console.log(`updated post: ${post_id}`);
                 resolve();

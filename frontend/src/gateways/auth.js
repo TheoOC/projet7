@@ -4,12 +4,15 @@ exports.login = (data) => {
     return new Promise((resolve, reject) => {
         axios.post('http://localhost:3000/api/auth/login', data)
             .then(res => {
-                console.log('login request success');
+                console.log(`login request success: ${JSON.stringify(res.data)}`);
                 resolve(res.data);
             })
-            .catch(() => reject('error trying to login'));
+            .catch((error) => {
+                console.log(`login request failed`);
+                reject(`error trying to login: ${error}`)
+            });
 
-    })
+    });
 };
 
 exports.signup = (data) => {

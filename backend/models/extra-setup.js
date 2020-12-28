@@ -1,4 +1,3 @@
-
 function applyExtraSetup(sequelize) {
     console.log("in extra setup");
 

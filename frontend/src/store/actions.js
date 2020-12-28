@@ -6,25 +6,26 @@ const AUTH_REQUEST = ({ commit }, user) => {
         //commit AUTH_REQUEST mutation
         commit("AUTH_REQUEST");
         //call api
-        api.login(user).then((res) => {
-            console.log(`in AUTH_REQUEST: ${JSON.stringify(res)}`);
-            const token = res.token;
-            localStorage.setItem('user-token', token);
+        api.login(user)
+            .then((res) => {
+                console.log(`in AUTH_REQUEST: ${JSON.stringify(res)}`);
+                const token = res.token;
+                localStorage.setItem('user-token', token);
 
-            const uid = res.userId;
-            localStorage.setItem('user-id', uid);
+                const uid = res.userId;
+                localStorage.setItem('user-id', uid);
 
-            console.log("uid====> " + uid);
+                console.log("uid====> " + uid);
 
-            //set authorization header to token
-            axios.defaults.headers.common = { 'Authorization': `Bearer ${token}` };
-            console.log(`authorization header set: ${axios.defaults.headers.common['Authorization']}`);
+                //set authorization header to token
+                axios.defaults.headers.common = { 'Authorization': `Bearer ${token}` };
+                console.log(`authorization header set: ${axios.defaults.headers.common['Authorization']}`);
 
-            commit("AUTH_SUCCESS", token);
-            resolve(res);
-        }).catch(() => {
-            reject('error');
-        })
+                commit("AUTH_SUCCESS", token);
+                resolve(`AUTH_REQUEST successfull`);
+            }).catch((error) => {
+                reject(`${error}`);
+            })
         //after call to api call the mutation
     });
 };

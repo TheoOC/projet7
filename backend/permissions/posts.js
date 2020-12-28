@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const Joi = require('joi');
 
 const sequelize = require('../database');
 const { Post, User } = sequelize.models;
@@ -9,6 +10,32 @@ if (result.error) {
     throw result.error;
 }
 
+function validateInput(req) {
+    return new Promise((resolve, reject) => {
+        console.log(`in validateInput`);
+        const schema = Joi.object({
+            title: Joi.string()
+                .alphanum()//Requires the string value to only contain a-z, A-Z, and 0-9.
+                .min(4)
+                .max(20)
+                .required(),
+            textContent: Joi.string()
+                .min(4)
+                .max(100)
+                .required()
+        });
+        const postObject = JSON.parse(req.body.post);
+        //if input is invalid error will be assigne a ValidationError
+        const { error, value } = schema.validate({ title: postObject.title, textContent: postObject.textContent });
+        //check if error is a validation error
+        if (Joi.isError(error)) {
+            //if validation error delete image and return error code 422 for input error
+            reject(error);
+        }
+        //else continue
+        resolve();
+    })
+}
 function hasPermission(req) {
     return new Promise((resolve, reject) => {
         console.log('in post has permission !!!!!!!!!!');
@@ -54,5 +81,6 @@ function hasPermission(req) {
 }
 
 module.exports = {
+    validateInput,
     hasPermission
 }

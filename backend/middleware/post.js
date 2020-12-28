@@ -1,4 +1,17 @@
-const { hasPermission } = require('../permissions/posts');
+const { validateInput, hasPermission } = require('../permissions/posts');
+
+function validatePostInput(req, res, next) {
+    console.log(`in validatePostInput`);
+    const tReq = req;
+    validateInput(tReq)
+        .then(() => {
+            console.log("input validated!!");
+            next();
+        }).catch(() => {
+            res.status(422)
+            return res.send('input not valid');
+        });
+}
 
 function authDeletePost(req, res, next) {
     //save current req and send it to has Permission
@@ -16,7 +29,6 @@ function authDeletePost(req, res, next) {
 }
 
 function authUpdatePost(req, res, next) {
-    console.log('in authUpdatePost');
 
     const tReq = req;
     hasPermission(tReq)
@@ -33,6 +45,7 @@ function authUpdatePost(req, res, next) {
 
 
 module.exports = {
+    validatePostInput,
     authDeletePost,
     authUpdatePost
 }
