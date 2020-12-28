@@ -1,5 +1,19 @@
 const axios = require('axios');
 
+exports.autoAuthVerification = () => {
+    return new Promise((resolve, reject) => {
+        axios.get('http://localhost:3000/api/auth/autoAuth')
+            .then((res) => {
+                console.log(`user in autoAuthVerification gateway: ${JSON.stringify(res.data)}`);
+                resolve(res.data);
+            })
+            .catch((error) => {
+                console.log(`failed auto login`);
+                reject(error);
+            });
+    })
+};
+
 exports.login = (data) => {
     return new Promise((resolve, reject) => {
         axios.post('http://localhost:3000/api/auth/login', data)

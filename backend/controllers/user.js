@@ -11,6 +11,10 @@ exports.getUser = (req, res, next) => {
         }
     })
         .then((user) => {
+            if (user === null) {
+                console.log(`user not found`);
+                res.status(400).json({ error });
+            }
             res.status(200).json(user);
         })
         .catch(error => res.status(400).json({ error }));

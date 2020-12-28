@@ -9,10 +9,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    //replace local storage by cokies
     user: {
       token: localStorage.getItem('user-token') || '',
       userId: localStorage.getItem('user-id') || '',
+      isAdmin: localStorage.getItem('isAdmin') || '',
     },
     auth: {
       status: '',

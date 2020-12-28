@@ -1,21 +1,54 @@
-import api from '../gateways/auth';
+import aApi from '../gateways/auth';
 import axios from 'axios';
+
+const AUTH_AUTO = ({ commit }, token) => {
+    return new Promise((resolve, reject) => {
+        commit("AUTH_REQUEST");
+        aApi.autoAuthVerification()
+            .then((user) => {
+                console.log(`user in autoAuth: ${user}`)
+                console.log(`auto logged in: authorization header: ${axios.defaults.headers.common['Authorization']}`);
+
+                //set user id
+                const uid = user.userId;
+                localStorage.setItem('user-id', uid);
+                console.log(`uid====> ${uid}`);
+
+                //set isAdmin flag
+                const isAdminFlag = user.isAdmin;
+                localStorage.setItem('isAdmin', isAdminFlag);
+                console.log(`is user Admin ?: ${isAdminFlag == 1}`);
+
+                commit("AUTH_SUCCESS", token);
+                resolve(`AUTH_REQUEST successfull`);
+            })
+            .catch((error) => {
+                reject(`${error}`);
+            });
+    })
+};
 
 const AUTH_REQUEST = ({ commit }, user) => {
     return new Promise((resolve, reject) => {
         //commit AUTH_REQUEST mutation
         commit("AUTH_REQUEST");
-        //call api
-        api.login(user)
+        //call aApi
+        aApi.login(user)
             .then((res) => {
                 console.log(`in AUTH_REQUEST: ${JSON.stringify(res)}`);
+                //set token
                 const token = res.token;
                 localStorage.setItem('user-token', token);
 
+                //set user id
                 const uid = res.userId;
                 localStorage.setItem('user-id', uid);
+                console.log(`uid====> ${uid}`);
 
-                console.log("uid====> " + uid);
+                //set isAdmin flag
+                const isAdminFlag = res.isAdmin;
+                localStorage.setItem('isAdmin', isAdminFlag);
+                console.log(`is user Admin ?: ${isAdminFlag == 1}`);
 
                 //set authorization header to token
                 axios.defaults.headers.common = { 'Authorization': `Bearer ${token}` };
@@ -26,15 +59,17 @@ const AUTH_REQUEST = ({ commit }, user) => {
             }).catch((error) => {
                 reject(`${error}`);
             })
-        //after call to api call the mutation
     });
 };
 const AUTH_LOGOUT = ({ commit }) => {
     return new Promise((resolve) => {
         commit("AUTH_LOGOUT");
         localStorage.removeItem('user-token');
-
+        console.log(`user-token removed from local storage`);
+        localStorage.removeItem('isAdmin');
+        console.log(`isAdmin removed from local storage`);
         localStorage.removeItem('user-id');
+        console.log(`user-id removed from local storage`);
 
         //delete Authorization header
         delete axios.defaults.headers.common['Authorization'];
@@ -44,6 +79,7 @@ const AUTH_LOGOUT = ({ commit }) => {
 };
 
 export default {
+    AUTH_AUTO,
     AUTH_REQUEST,
     AUTH_LOGOUT
 };

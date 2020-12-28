@@ -2,21 +2,14 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import axios from 'axios'
 
 import interceptorSetup from './helpers/interceptors';
 interceptorSetup();
+import autoAuthentication from './helpers/auto-authentication';
+autoAuthentication();
 
 Vue.config.productionTip = false
 
-const token = localStorage.getItem('user-token')
-
-//handle auto-authentification
-if (token) {
-  axios.defaults.headers.common = { 'Authorization': `Bearer ${token}` };
-  console.log(`auto logged in: authorization header: ${axios.defaults.headers.common['Authorization']}`);
-  console.log(`user id: ${store.getters.getUserId}`)
-}
 
 new Vue({
   router,

@@ -5,7 +5,7 @@ import store from '../store'
 Vue.use(VueRouter)
 
 //navigation guards
-
+//allow only not authenticated user to
 const ifNotAuthenticated = (to, from, next) => {
   if (!store.getters.isAuthenticated) {
     next()
@@ -14,6 +14,7 @@ const ifNotAuthenticated = (to, from, next) => {
   next('/')
 }
 
+//allow only authenticated user to
 const ifAuthenticated = (to, from, next) => {
   if (store.getters.isAuthenticated) {
     next()
