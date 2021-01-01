@@ -2,7 +2,7 @@
   <div class="container">
     <h3>{{ comment }}</h3>
     <p>{{ comment.textContent }}</p>
-    <div v-if="hasPermission">
+    <div v-if="hasPermission === true">
       <button @click="redirectToEditComment">edit comment</button>
     </div>
   </div>
@@ -17,6 +17,12 @@ export default {
   },
   computed: {
     hasPermission: function () {
+      console.log(`
+${
+  this.$store.getters.getUserId === this.comment.UserId ||
+  this.$store.getters.isAdmin
+}    
+    `);
       return (
         this.$store.getters.getUserId === this.comment.UserId ||
         this.$store.getters.isAdmin

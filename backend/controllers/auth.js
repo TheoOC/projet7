@@ -24,13 +24,13 @@ exports.autoAuthVerification = (req, res, next) => {
         .then((user) => {
             if (user === null) {
                 console.log(`autoAuthVerification ctrl user not found`);
-                res.status(400).json({ error });
+                res.status(500).json({ error });
             }
             console.log(`autoAuthVerification ctrl user found: ${user}`);
             res.status(200).json(user);
         }).catch((error) => {
             console.log(`autoAuthVerification ctrl user not found`);
-            res.status(400).json({ error });
+            res.status(500).json({ error });
         });
 
 }
@@ -56,7 +56,7 @@ exports.login = (req, res, next) => {
                 console.log('user not found');
                 return res.status(401).json({ error: "USER NOT FOUND!!!" });
             }
-            console.log('user not null');
+            console.log('user found');
             bcrypt.compare(req.body.password, user.password)
                 .then(valid => {
                     if (!valid) {

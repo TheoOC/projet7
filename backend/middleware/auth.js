@@ -1,12 +1,43 @@
 const jwt = require('jsonwebtoken');
 
+const { validateLogInput, validateSignInput } = require('../permissions/auth');
+
 const dotenv = require('dotenv');
 const result = dotenv.config();
 if (result.error) {
     throw result.error;
 }
 
-module.exports = (req, res, next) => {
+function validateLoginInput(req, res, next) {
+    console.log(`in validateLoginInput`);
+    const tReq = req;
+    validateLogInput(tReq)
+        .then(() => {
+            console.log("input validated!!");
+            next();
+        })
+        .catch((error) => {
+            console.log(`input invalid: ${error}`);
+            res.status(422)
+            return res.send('input not valid');
+        });
+};
+
+function validateSigninInput(req, res, next) {
+    console.log(`in validateLoginInput`);
+    const tReq = req;
+    validateSignInput(tReq)
+        .then(() => {
+            console.log("input validated!!");
+            next();
+        })
+        .catch((error) => {
+            console.log(`input invalid: ${error}`);
+            res.status(422)
+            return res.send('input not valid');
+        });
+};
+function auth(req, res, next) {
 
     console.log(`starting auth try block`);
     try {
@@ -37,3 +68,8 @@ module.exports = (req, res, next) => {
         });
     }
 };
+module.exports = {
+    validateLoginInput,
+    validateSigninInput,
+    auth
+}

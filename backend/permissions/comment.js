@@ -1,8 +1,29 @@
+const Joi = require('joi');
+const jwt = require('jsonwebtoken');
+
 const sequelize = require('../database');
 const { User, Comment } = sequelize.models;
 
-const jwt = require('jsonwebtoken');
-
+function validateInput(req) {
+    return new Promise((resolve, reject) => {
+        console.log(`in comment validateInput: ${req.body.textContent}`);
+        //remove end and beginning whitespaces
+        req.body.textContent = req.body.textContent.trim();
+        const schema = Joi.object({
+            //allow whitespace only in the middle of the string and not at the beginning and end ( with ^\s witch mean no whitespace) 
+            //allow any charater with .
+            textContent: Joi.string().required().min(2).max(50).pattern(new RegExp(/^[^\s].+[^\s]$/)),
+        });
+        //if input is invalid error will be assigne a ValidationError
+        const { error, value } = schema.validate({ textContent: req.body.textContent });
+        //check if error is a validation error
+        if (Joi.isError(error)) {
+            reject(error);
+        }
+        //else continue
+        resolve();
+    })
+}
 function hasPermission(req) {
     return new Promise((resolve, reject) => {
         //check if user is admin or UserId in headers is the same as the comment.Userid
@@ -43,5 +64,6 @@ function hasPermission(req) {
 }
 
 module.exports = {
+    validateInput,
     hasPermission
 }

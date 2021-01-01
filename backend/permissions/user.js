@@ -1,12 +1,44 @@
+const Joi = require('joi');
+const jwt = require('jsonwebtoken');
+
 const sequelize = require('../database');
 const { User } = sequelize.models;
-
-const jwt = require('jsonwebtoken');
 
 const dotenv = require('dotenv');
 const result = dotenv.config();
 if (result.error) {
     throw result.error;
+}
+
+
+function validateInput(req) {
+    return new Promise((resolve, reject) => {
+        console.log(`
+        in validateInput
+        body: ${JSON.stringify(req.body)}
+
+        `);
+        //trim username
+        req.body.username = req.body.username.trim();
+
+        const schema = Joi.object({
+            username: Joi.string()
+                .required()
+                .min(3)
+                .max(30)
+                .pattern(new RegExp(/^[^\s].+[^\s]$/)),
+
+        });
+        //if input is invalid error will be assigne a ValidationError
+        const { error, value } = schema.validate({ username: req.body.username });
+        //check if error is a validation error
+        if (Joi.isError(error)) {
+            //if validation error delete image and return error code 422 for input error
+            reject(error);
+        }
+        //else continue
+        resolve();
+    })
 }
 
 function hasPermission(req) {
@@ -35,5 +67,6 @@ function hasPermission(req) {
 }
 
 module.exports = {
+    validateInput,
     hasPermission
 }

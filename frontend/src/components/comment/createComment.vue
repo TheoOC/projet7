@@ -34,10 +34,12 @@ export default {
       cApi
         .createComment(cData)
         .then(() => {
+          this.textContent = null;
           console.log("successfully called createComment");
           this.$emit("get-all-comments");
         })
         .catch((error) => {
+          this.textContent = null;
           console.log(`failed to call createComment: ${error}`);
         });
     },

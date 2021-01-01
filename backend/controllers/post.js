@@ -20,10 +20,15 @@ exports.getPost = (req, res, next) => {
         }
     })
         .then((post) => {
+            if (post === null) {
+                console.log(`couldn't get post`);
+                res.status(500).json({ err });
+            }
             res.status(200).json(post);
         })
         .catch((err) => {
-            res.status(400).json({ err });
+            console.log(`error getting post`);
+            res.status(500).json({ err });
         });
 };
 
@@ -62,6 +67,10 @@ exports.updatePost = (req, res, next) => {
         }
     })
         .then((post) => {
+            if (post === null) {
+                console.log(`couldn't find post to update`);
+                res.status(500).json({ err });
+            }
             console.log(`post to update found: `);
             let postObject = JSON.parse(req.body.post);
             if (req.file) {
@@ -110,6 +119,10 @@ exports.deletePost = (req, res, next) => {
         }
     })
         .then((post) => {
+            if (post === null) {
+                console.log(`couldn't find post to delete`);
+                res.status(500).json({ err });
+            }
             if (post.imageUrl != null) {
                 console.log(`in if statement to delete the image`);
                 //get name of image

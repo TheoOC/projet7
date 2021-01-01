@@ -1,4 +1,20 @@
-const { hasPermission } = require('../permissions/user');
+const { validateInput, hasPermission } = require('../permissions/user');
+
+
+function validateUserInput(req, res, next) {
+    console.log(`in validatePostInput`);
+    const tReq = req;
+    validateInput(tReq)
+        .then(() => {
+            console.log("input validated!!");
+            next();
+        })
+        .catch(() => {
+            console.log(`input invalid`);
+            res.status(422)
+            return res.send('input not valid');
+        });
+};
 
 function authDeleteUser(req, res, next) {
     const tReq = req;
@@ -29,6 +45,7 @@ function authUpdateUser(req, res, next) {
 }
 
 module.exports = {
+    validateUserInput,
     authDeleteUser,
     authUpdateUser
 }

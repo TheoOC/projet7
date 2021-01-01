@@ -4,7 +4,7 @@
     <p>Content: {{ post.textContent }}</p>
     <p>post id: {{ this.$route.params.post_id }}</p>
     <p>{{ post }}</p>
-    <div v-if="hasPermission">
+    <div v-if="hasPermission === true">
       <button @click="redirectToEditPost">edit post</button>
     </div>
     <createComment v-on:get-all-comments="getAllComments" />
@@ -33,6 +33,12 @@ export default {
   },
   computed: {
     hasPermission: function () {
+      console.log(`
+${
+  this.$store.getters.getUserId === this.post.UserId ||
+  this.$store.getters.isAdmin
+}
+      `);
       return (
         this.$store.getters.getUserId === this.post.UserId ||
         this.$store.getters.isAdmin

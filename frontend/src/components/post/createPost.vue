@@ -25,6 +25,7 @@
         accept="image/*"
         @change="uploadImage($event)"
         id="file-input"
+        ref="fileInput"
       />
       <div>
         <img v-if="imageUrl" :src="imageUrl" />
@@ -62,10 +63,20 @@ export default {
       console.log(JSON.stringify(post));
       Post.createPost(post, this.image)
         .then(() => {
+          this.title = null;
+          this.textContent = null;
+          this.image = null;
+          this.imageUrl = null;
+          this.$refs.fileInput.value = null;
           console.log("successfully called create Post");
           this.$emit("get-all-posts");
         })
         .catch((error) => {
+          this.title = null;
+          this.textContent = null;
+          this.image = null;
+          this.imageUrl = null;
+          this.$refs.fileInput.value = null;
           console.log(`failed to call create post: ${error}`);
         });
     },

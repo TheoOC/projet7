@@ -8,11 +8,36 @@
 </template>
 
 <script>
+import store from "../../store/index";
+import uApi from "../../gateways/user";
+
 export default {
   name: "display-account",
-  props: { user: { type: Object, require: true } },
   data: function () {
-    return {};
+    return {
+      user: {},
+    };
+  },
+  methods: {
+    setDefaultInputValues: function () {
+      const user_id = store.getters.getUserId;
+      uApi
+        .getUserInfos(user_id)
+        .then((user) => {
+          this.user = user;
+          console.log(`default input values set`);
+        })
+        .catch((err) => {
+          this.user = null;
+          console.log(
+            `ther was an error getting the userInfos form the api: ${err}`
+          );
+        });
+    },
+  },
+  created: function () {
+    console.log(`display account created called`);
+    this.setDefaultInputValues();
   },
 };
 </script>

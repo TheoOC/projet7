@@ -46,3 +46,9 @@ export default {
   },
 };
 </script>
+
+<style  scoped>
+* {
+  white-space: pre-wrap;
+}
+</style>

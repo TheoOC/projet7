@@ -31,7 +31,7 @@ exports.getAllCommentsOfUser = (req, res, next) => {
             res.status(200).json(comments);
         })
         .catch(error => res.status(400).json({ error }));
-//
+    //
 };
 exports.getComment = (req, res, next) => {
     console.log(`get comment: id ===========> ${req.params.comment_id}`);
@@ -42,9 +42,14 @@ exports.getComment = (req, res, next) => {
         }
     })
         .then((comment) => {
+            if (!comment) {
+                console.log(`couldn't get comment`);
+                res.status(500).json({ error })
+            }
             res.status(200).json(comment);
         })
         .catch((err) => {
+            console.log(`error getting comment`);
             res.status(400).json({ err });
         });
 }
@@ -68,6 +73,10 @@ exports.updateComment = (req, res, next) => {
         }
     })
         .then((comment) => {
+            if (!comment) {
+                console.log(`couldn't find comment to update`);
+                res.status(500).json({ error })
+            }
             console.log(`post to update found`)
             //change comment fields
             comment.textContent = req.body.textContent;
@@ -87,7 +96,10 @@ exports.deleteComment = (req, res, next) => {
             id: commentQ
         }
     })
-        .then(() => { res.status(200).json({ message: 'comment deleted' }) })
+        .then(() => {
+            console.log(`comment destroyed`);
+            res.status(200).json({ message: 'comment deleted' });
+        })
         .catch(error => { res.status(400).json({ error }) });
 }
 

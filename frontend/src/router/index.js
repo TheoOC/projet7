@@ -25,6 +25,10 @@ const ifAuthenticated = (to, from, next) => {
 
 const routes = [
   {
+    path: '*',
+    component: () => import('../views/error/PageNotFound.vue'),
+  },
+  {
     path: '/error',
     name: 'Error',
     component: () => import('../views/error/Error.vue'),
@@ -73,7 +77,7 @@ const routes = [
     component: () => import('../views/comment/EditComment.vue'),
     props: true,
     beforeEnter: ifAuthenticated,
-  }
+  },
 ]
 
 const router = new VueRouter({

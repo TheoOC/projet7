@@ -13,9 +13,9 @@ exports.getUserInfos = (user_id) => {
             });
     })
 }
-exports.updateUser = (data, user_id) => {
+exports.updateUser = (username, user_id) => {
     return new Promise((resolve, reject) => {
-        axios.put(`http://localhost:3000/api/user/${user_id}`, data)
+        axios.put(`http://localhost:3000/api/user/${user_id}`, username)
             .then(() => {
                 console.log(`updated user: ${user_id}`);
                 resolve();

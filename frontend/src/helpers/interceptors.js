@@ -19,6 +19,15 @@ export default function setup() {
             return response;
         }, function (err) {
             console.log(`THIS IS THE RESPONSE INTERCEPTOR WHEN FAILED`);
+            if (err.response.status === 500) {
+                console.log(`ERR 500 INTERCEPTED`);
+                store.dispatch("AUTH_LOGOUT");
+                router.push({
+                    name: "Error",
+                    params: { errorMessage: "500 server error", disconnect: true },
+                })
+                return Promise.reject(err);
+            }
             if (err.response.status === 400) {
                 console.log(`ERR 400 INTERCEPTED`);
                 store.dispatch("AUTH_LOGOUT");

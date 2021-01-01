@@ -38,12 +38,20 @@ exports.updateUser = (req, res, next) => {
         }
     })
         .then((user) => {
-            console.log(`user to update found`)
+            if (user === null) {
+                console.log(`failed to update user`)
+                res.status(500).json({ error })
+            }
+            console.log(`user to update found
+            new username: ${req.body.username}
+            `)
             //change username
             user.username = req.body.username;
             user.save().then(() => {
+                console.log(`user saved successfully`);
                 res.status(200).json({ message: "user updated" });
             }).catch((error) => {
+                console.log(`failed to update user`)
                 res.status(400).json({ error });
             });
         })

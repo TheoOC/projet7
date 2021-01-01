@@ -6,7 +6,7 @@
       <label for="username">username</label>
       <input
         required
-        v-model="username"
+        v-model="user.username"
         id="username"
         name="text"
         placeholder="new username"
@@ -23,10 +23,9 @@ import uApi from "../../gateways/user";
 
 export default {
   name: "edit-account",
-  props: { user: { type: Object, required: true } },
   data: function () {
     return {
-      username: "",
+      user: {},
     };
   },
   methods: {
@@ -35,8 +34,8 @@ export default {
       uApi
         .getUserInfos(user_id)
         .then((user) => {
-          this.username = user.username;
-          document.getElementById("username").defaultValue = this.username;
+          this.user = user;
+          document.getElementById("username").defaultValue = this.user.username;
           console.log(`default input values set`);
         })
         .catch((err) => {
@@ -48,9 +47,10 @@ export default {
     },
     editAccount: function () {
       const user_id = store.getters.getUserId;
-      const { user } = this;
+      const { username } = this.user;
+      console.log(`username: ${this.user.username}`);
       uApi
-        .updateUser(user, user_id)
+        .updateUser({ username }, user_id)
         .then(() => {
           console.log(`successfully called update user`);
         })
@@ -71,6 +71,9 @@ export default {
           `failed to call delete user: ${err}`;
         });
     },
+  },
+  created: function () {
+    console.log(`edit account created called`);
   },
   mounted: function () {
     this.setDefaultInputValues();

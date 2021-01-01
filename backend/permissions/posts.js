@@ -1,5 +1,5 @@
-const jwt = require('jsonwebtoken');
 const Joi = require('joi');
+const jwt = require('jsonwebtoken');
 
 const sequelize = require('../database');
 const { Post, User } = sequelize.models;
@@ -13,18 +13,26 @@ if (result.error) {
 function validateInput(req) {
     return new Promise((resolve, reject) => {
         console.log(`in validateInput`);
+        //trim title and textContent of request
+        const postObject = JSON.parse(req.body.post);
+        postObject.title = postObject.title.trim();
+        postObject.textContent = postObject.textContent.trim();
+        //reassign the post to once trimmed
+        req.body.post = JSON.stringify(postObject);
+
         const schema = Joi.object({
             title: Joi.string()
-                .alphanum()//Requires the string value to only contain a-z, A-Z, and 0-9.
+                .required()
                 .min(4)
                 .max(20)
-                .required(),
+                .pattern(new RegExp(/^[^\s].+[^\s]$/)),
             textContent: Joi.string()
+                .required()
                 .min(4)
                 .max(100)
-                .required()
+                .pattern(new RegExp(/^[^\s].+[^\s]$/)),
+
         });
-        const postObject = JSON.parse(req.body.post);
         //if input is invalid error will be assigne a ValidationError
         const { error, value } = schema.validate({ title: postObject.title, textContent: postObject.textContent });
         //check if error is a validation error
