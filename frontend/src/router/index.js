@@ -115,10 +115,6 @@ const hasCommentPermissions = (to, from, next) => {
 
 const routes = [
   {
-    path: '*',
-    component: () => import('../views/error/PageNotFound.vue'),
-  },
-  {
     path: '/error',
     name: 'Error',
     component: () => import('../views/error/Error.vue'),
@@ -143,7 +139,7 @@ const routes = [
     beforeEnter: ifNotAuthenticated,
   },
   {
-    path: '/account',
+    path: '/account/:user_id',
     name: 'Account',
     component: () => import('../views/user/Account.vue'),
     beforeEnter: ifAuthenticated,
@@ -166,6 +162,10 @@ const routes = [
     component: () => import('../views/comment/EditComment.vue'),
     props: true,
     beforeEnter: hasCommentPermissions,
+  },
+  {
+    path: '*',
+    component: () => import('../views/error/PageNotFound.vue'),
   },
 ]
 

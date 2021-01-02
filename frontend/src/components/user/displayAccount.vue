@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import store from "../../store/index";
 import uApi from "../../gateways/user";
 
 export default {
@@ -20,7 +19,7 @@ export default {
   },
   methods: {
     setDefaultInputValues: function () {
-      const user_id = store.getters.getUserId;
+      const user_id = this.$route.params.user_id;
       uApi
         .getUserInfos(user_id)
         .then((user) => {

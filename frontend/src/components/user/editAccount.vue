@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     setDefaultInputValues: function () {
-      const user_id = store.getters.getUserId;
+      const user_id = this.$route.params.user_id;
       uApi
         .getUserInfos(user_id)
         .then((user) => {
@@ -46,7 +46,8 @@ export default {
         });
     },
     editAccount: function () {
-      const user_id = store.getters.getUserId;
+      const user_id = this.$route.params.user_id;
+
       const { username } = this.user;
       console.log(`username: ${this.user.username}`);
       uApi
@@ -59,7 +60,7 @@ export default {
         });
     },
     deleteAccount: function () {
-      const user_id = store.getters.getUserId;
+      const user_id = this.$route.params.user_id;
       uApi
         .deleteUser(user_id)
         .then(() => {

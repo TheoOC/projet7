@@ -7,7 +7,8 @@
       </div>
       <div v-else>
         <router-link to="/">Home</router-link> |
-        <router-link to="/account">Account</router-link> |
+        <router-link :to="`/account/${user_id}`">Account</router-link>
+        |
         <Logout />
       </div>
     </nav>
@@ -16,6 +17,7 @@
 
 <script>
 import Logout from "../../components/auth/logout";
+import store from "../../store/index";
 
 export default {
   name: "Nav",
@@ -23,7 +25,9 @@ export default {
     Logout,
   },
   data: function () {
-    return {};
+    return {
+      user_id: store.getters.getUserId
+    };
   },
   computed: {
     isAuth() {
