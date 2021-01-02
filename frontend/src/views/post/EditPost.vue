@@ -33,6 +33,7 @@
       <input type="submit" value="Submit" />
     </form>
     <button @click="deletePost">delete Post</button>
+    <button @click="backToPost">go back to post {{ postId }}</button>
   </div>
 </template>
 
@@ -47,9 +48,13 @@ export default {
       textContent: "",
       image: null,
       imageUrl: null,
+      postId: "",
     };
   },
   methods: {
+    backToPost() {
+      this.$router.push(`/post/${this.postId}`);
+    },
     uploadImage(event) {
       //save image
       this.image = event.target.files[0];
@@ -64,6 +69,7 @@ export default {
           this.title = post.title;
           this.textContent = post.textContent;
           this.imageUrl = post.imageUrl;
+          this.postId = post.id;
           document.getElementById("title").defaultValue = this.title;
           document.getElementById(
             "textContent"
@@ -79,24 +85,22 @@ export default {
         });
     },
     editPost: function () {
-      const post_id = this.$route.params.post_id;
       const { title, textContent } = this;
       const post = { title, textContent };
       pApi
-        .updatePost(post, this.image, post_id)
+        .updatePost(post, this.image, this.postId)
         .then(() => {
           console.log(`successfully called updatePost`);
-          this.$router.push(`/post/${post_id}`);
+          this.$router.push(`/post/${this.postId}`);
         })
         .catch((err) => {
           console.log(`failed to call updatePost: ${err}`);
-          this.$router.push(`/post/${post_id}`);
+          this.$router.push(`/post/${this.postId}`);
         });
     },
     deletePost: function () {
-      const post_id = this.$route.params.post_id;
       pApi
-        .deletePost(post_id)
+        .deletePost(this.postId)
         .then(() => {
           console.log(`successfully called deletePost`);
           this.$router.push("/");

@@ -9,10 +9,10 @@
         name="text"
         placeholder="write some text"
       ></textarea>
-      <h3>comment from post: {{ postId }} </h3>
       <input type="submit" value="Submit" />
     </form>
     <button @click="deleteComment">delete comment</button>
+    <button @click="backToPost">go back to post {{ postId }}</button>
   </div>
 </template>
 
@@ -33,6 +33,10 @@ export default {
     };
   },
   methods: {
+    backToPost() {
+      const post_id = this.postId;
+      this.$router.push(`/post/${post_id}`);
+    },
     setDefaultInputValues: function () {
       const comment_id = this.$route.params.comment_id;
       cApi

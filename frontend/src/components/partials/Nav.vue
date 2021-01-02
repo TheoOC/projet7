@@ -10,7 +10,6 @@
         <router-link :to="`/account/${getUserId}`">Account</router-link>
         |
         <Logout />
-        <p>user_id: {{ getUserId }}</p>
       </div>
     </nav>
   </div>

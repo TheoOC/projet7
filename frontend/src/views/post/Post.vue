@@ -7,6 +7,9 @@
     <div v-if="hasPermission === true">
       <button @click="redirectToEditPost">edit post</button>
     </div>
+    <button @click="redirectToPostOwnerProfile">
+      posted by: {{ user.username }}
+    </button>
     <createComment v-on:get-all-comments="getAllComments" />
     <commentPreview
       v-for="comment in comments"
@@ -20,6 +23,7 @@
 import Vue from "vue";
 import store from "../../store/index";
 import pApi from "../../gateways/post";
+import uApi from "../../gateways/user";
 import createComment from "../../components/comment/createComment";
 import commentPreview from "../../components/comment/commentPreview";
 
@@ -28,6 +32,7 @@ export default {
   components: { createComment, commentPreview },
   data: function () {
     return {
+      user: {},
       post: {},
       comments: [],
     };
@@ -49,11 +54,26 @@ export default {
     },
   },
   methods: {
-    getPost: function () {
+    redirectToPostOwnerProfile: function () {
+      this.$router.push(`/account/${this.user.id}`);
+    },
+    getPostInfos: function () {
+      //get post and user who made the post
       pApi
         .getPost(this.$route.params.post_id)
         .then((post) => {
+          console.log(`POST IN DATA SET !!!!!!!!`);
           Vue.set(this, "post", post);
+          const user_id = post.UserId;
+          uApi
+            .getUserInfos(user_id)
+            .then((user) => {
+              this.user = user;
+            })
+            .catch((error) => {
+              this.user = null;
+              console.log(`${error}`);
+            });
         })
         .catch((error) => {
           this.post = null;
@@ -88,9 +108,8 @@ export default {
     },
   },
   created: function () {
-    this.getPost();
+    this.getPostInfos();
     this.getAllComments();
-    //get all comments of post
   },
 };
 </script>
