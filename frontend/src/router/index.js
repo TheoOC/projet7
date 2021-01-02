@@ -115,16 +115,10 @@ const hasCommentPermissions = (to, from, next) => {
 
 const routes = [
   {
-    path: '/error',
-    name: 'Error',
-    component: () => import('../views/error/Error.vue'),
-    props: true,
-  },
-  {
-    path: '/',
-    name: 'Home',
-    component: () => import('../views/Home.vue'),
-    beforeEnter: ifAuthenticated,
+    path: '/login',
+    name: 'Login',
+    component: () => import('../views/auth/Login.vue'),
+    beforeEnter: ifNotAuthenticated,
   },
   {
     path: '/signup',
@@ -133,10 +127,10 @@ const routes = [
     beforeEnter: ifNotAuthenticated,
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: () => import('../views/auth/Login.vue'),
-    beforeEnter: ifNotAuthenticated,
+    path: '/',
+    name: 'Home',
+    component: () => import('../views/Home.vue'),
+    beforeEnter: ifAuthenticated,
   },
   {
     path: '/account/:user_id',
@@ -162,6 +156,12 @@ const routes = [
     component: () => import('../views/comment/EditComment.vue'),
     props: true,
     beforeEnter: hasCommentPermissions,
+  },
+  {
+    path: '/error',
+    name: 'Error',
+    component: () => import('../views/error/Error.vue'),
+    props: true,
   },
   {
     path: '*',

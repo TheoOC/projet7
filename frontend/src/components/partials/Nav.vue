@@ -7,9 +7,10 @@
       </div>
       <div v-else>
         <router-link to="/">Home</router-link> |
-        <router-link :to="`/account/${user_id}`">Account</router-link>
+        <router-link :to="`/account/${getUserId}`">Account</router-link>
         |
         <Logout />
+        <p>user_id: {{ getUserId }}</p>
       </div>
     </nav>
   </div>
@@ -25,13 +26,15 @@ export default {
     Logout,
   },
   data: function () {
-    return {
-      user_id: store.getters.getUserId
-    };
+    return {};
   },
   computed: {
+    getUserId() {
+      console.log(`GETTING NAV USER ID: ${store.getters.getUserId}`);
+      return store.getters.getUserId;
+    },
     isAuth() {
-      return this.$store.getters.isAuthenticated;
+      return store.getters.isAuthenticated;
     },
   },
 };
