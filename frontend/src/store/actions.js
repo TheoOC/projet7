@@ -6,7 +6,6 @@ const AUTH_AUTO = ({ commit }, token) => {
         commit("AUTH_REQUEST");
         aApi.autoAuthVerification()
             .then((user) => {
-                console.log(`user in autoAuth: ${user}`)
                 console.log(`auto logged in: authorization header: ${axios.defaults.headers.common['Authorization']}`);
 
                 //set user id
@@ -14,9 +13,9 @@ const AUTH_AUTO = ({ commit }, token) => {
                 localStorage.setItem('user-id', uid);
                 console.log(`uid====> ${uid}`);
 
-                //set isAdmin flag
+                //set is-admin flag
                 const isAdminFlag = user.isAdmin;
-                localStorage.setItem('isAdmin', isAdminFlag);
+                localStorage.setItem('is-admin', isAdminFlag);
                 console.log(`is user Admin ?: ${isAdminFlag == 1}`);
 
                 commit("AUTH_SUCCESS", token);
@@ -47,7 +46,7 @@ const AUTH_REQUEST = ({ commit }, user) => {
 
                 //set isAdmin flag
                 const isAdminFlag = res.isAdmin;
-                localStorage.setItem('isAdmin', isAdminFlag);
+                localStorage.setItem('is-admin', isAdminFlag);
                 console.log(`is user Admin ?: ${isAdminFlag == 1}`);
 
                 //set authorization header to token
@@ -66,8 +65,8 @@ const AUTH_LOGOUT = ({ commit }) => {
         commit("AUTH_LOGOUT");
         localStorage.removeItem('user-token');
         console.log(`user-token removed from local storage`);
-        localStorage.removeItem('isAdmin');
-        console.log(`isAdmin removed from local storage`);
+        localStorage.removeItem('is-admin');
+        console.log(`is-admin removed from local storage`);
         localStorage.removeItem('user-id');
         console.log(`user-id removed from local storage`);
 

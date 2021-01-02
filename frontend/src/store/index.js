@@ -12,7 +12,7 @@ export default new Vuex.Store({
     user: {
       token: localStorage.getItem('user-token') || '',
       userId: localStorage.getItem('user-id') || '',
-      isAdmin: localStorage.getItem('isAdmin') || '',
+      isAdmin: localStorage.getItem('is-admin') || '',
     },
     auth: {
       status: '',

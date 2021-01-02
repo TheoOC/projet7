@@ -8,6 +8,7 @@ const AUTH_SUCCESS = (state, token) => {
     //state.user.token = token;
     Vue.set(state.user, 'token', token);
     Vue.set(state.user, 'userId', localStorage.getItem('user-id'));
+    Vue.set(state.user, 'isAdmin', localStorage.getItem('is-admin'));
     //state.user.userId = localStorage.getItem('user-id');
 };
 const AUTH_ERROR = (state) => {
@@ -16,6 +17,7 @@ const AUTH_ERROR = (state) => {
 const AUTH_LOGOUT = (state) => {
     state.user.token = null;
     state.user.userId = null;
+    state.user.isAdmin = null;
     state.auth.status = 'logged out';
 };
 

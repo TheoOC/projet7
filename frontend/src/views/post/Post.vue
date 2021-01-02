@@ -18,6 +18,7 @@
 
 <script>
 import Vue from "vue";
+import store from "../../store/index";
 import pApi from "../../gateways/post";
 import createComment from "../../components/comment/createComment";
 import commentPreview from "../../components/comment/commentPreview";
@@ -34,14 +35,16 @@ export default {
   computed: {
     hasPermission: function () {
       console.log(`
-${
-  this.$store.getters.getUserId === this.post.UserId ||
-  this.$store.getters.isAdmin
-}
+      can user edit post: is store userid same as post userid -> ${
+        store.getters.getUserId === this.post.UserId
+      }
+      is user admin -> ${store.getters.isAdmin} 
+      return from has permission-> ${
+        store.getters.getUserId === this.post.UserId || store.getters.isAdmin
+      }
       `);
       return (
-        this.$store.getters.getUserId === this.post.UserId ||
-        this.$store.getters.isAdmin
+        store.getters.getUserId === this.post.UserId || store.getters.isAdmin
       );
     },
   },
