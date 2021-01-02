@@ -56,7 +56,8 @@ exports.createPost = (post, image) => {
         };
         axios.post('http://localhost:3000/api/post', formData, config)
             .then((res) => {
-                console.log(`created post: ${JSON.stringify(res)}`);
+                console.log(`response: ${res}`);
+                console.log(`created post: ${JSON.stringify(res.data)}`);
                 resolve();
             })
             .catch((error) => {

@@ -57,5 +57,6 @@ export default function setup() {
                 });
                 return Promise.reject(err);
             }
+            return Promise.reject(err);
         })
 }
