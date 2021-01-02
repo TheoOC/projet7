@@ -19,7 +19,6 @@ exports.getAllCommentsOfPost = (req, res, next) => {
             res.status(400).json({ error })
         });
 };
-
 exports.getAllCommentsOfUser = (req, res, next) => {
     const userQ = parseInt(req.params.user_id);
     Comment.findAll({

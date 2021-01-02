@@ -62,7 +62,6 @@ export default {
       pApi
         .getPost(this.$route.params.post_id)
         .then((post) => {
-          console.log(`POST IN DATA SET !!!!!!!!`);
           Vue.set(this, "post", post);
           const user_id = post.UserId;
           uApi

@@ -61,8 +61,8 @@ function auth(req, res, next) {
             console.log(`passed auth`);
             next();
         }
-    } catch {
-        console.log(`in catch block`);
+    } catch (error) {
+        console.log(`auth failed error: ${error}`);
         res.status(401).json({
             error: new Error('invalid request!')
         });

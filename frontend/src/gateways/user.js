@@ -43,11 +43,38 @@ exports.getAllCommentsOfUser = (user_id) => {
     return new Promise((resolve, reject) => {
         axios.get(`http://localhost:3000/api/user/comment/${user_id}`)
             .then((res) => {
-                console.log(`fot all comments of user: ${user_id}`);
+                console.log(`got all comments of user: ${user_id}`);
                 resolve(res);
             })
             .catch((err) => {
                 console.log(`failed to get comments of user: ${user_id}`);
+                reject(err);
+            });
+    })
+}
+exports.getAllPostsOfUser = (user_id) => {
+    return new Promise((resolve, reject) => {
+        axios.get(`http://localhost:3000/api/post/${user_id}`)
+            .then((res) => {
+                console.log(`got all posts of user: ${user_id}`);
+                resolve(res);
+            })
+            .catch((err) => {
+                console.log(`failed to get posts of user: ${user_id}`);
+                reject(err);
+            });
+    })
+}
+exports.getAllUsers = () => {
+    return new Promise((resolve, reject) => {
+        console.log(`in get all users`);
+        axios.get(`http://localhost:3000/api/user`)
+            .then((res) => {
+                console.log(`got all users: ${res}`);
+                resolve(res);
+            })
+            .catch((err) => {
+                console.log(`failed to get all users`);
                 reject(err);
             });
     })

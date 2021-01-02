@@ -3,6 +3,19 @@ const fs = require('fs');
 const sequelize = require('../database');
 const Post = require('../models/Post.model')(sequelize);
 
+exports.getAllPostsOfUser = (req, res, next) => {
+    const userQ = parseInt(req.params.user_id);
+    Post.findAll({
+        where: {
+            UserId: userQ
+        }
+    })
+        .then((posts) => {
+            res.status(200).json(posts);
+        })
+        .catch((error) => { res.status(400).json({ error }) });
+}
+
 exports.getAllPosts = (req, res, next) => {
     Post.findAll()
         .then((posts) => {

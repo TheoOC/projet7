@@ -6,11 +6,12 @@ const { validateCommentInput, authDeleteComment, authUpdateComment } = require('
 
 const router = express.Router();
 
-router.post('/', auth, validateCommentInput, commentCtrl.createComment);
 router.get('/:comment_id', auth, commentCtrl.getComment);
 router.get('/post/:post_id', auth, commentCtrl.getAllCommentsOfPost);
-router.get('/post/:user_id', auth, commentCtrl.getAllCommentsOfUser);
-router.put('/:comment_id', auth, validateCommentInput, authUpdateComment, commentCtrl.updateComment);
+router.get('/:user_id', auth, commentCtrl.getAllCommentsOfUser);
+
+router.post('/', auth, validateCommentInput, commentCtrl.createComment);
+router.put('/:comment_id', auth, authUpdateComment, validateCommentInput, commentCtrl.updateComment);
 router.delete('/:comment_id', auth, authDeleteComment, commentCtrl.deleteComment);
 
 module.exports = router;

@@ -28,6 +28,7 @@ exports.createComment = (data) => {
             });
     })
 }
+
 exports.updateComment = (data, comment_id) => {
     return new Promise((resolve, reject) => {
         axios.put(`http://localhost:3000/api/comment/${comment_id}`, data)

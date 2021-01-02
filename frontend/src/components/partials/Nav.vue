@@ -11,6 +11,10 @@
         |
         <Logout />
       </div>
+      <div v-if="isAdmin">
+        ||
+        <router-link to="/admin">admin pannel</router-link>
+      </div>
     </nav>
   </div>
 </template>
@@ -35,6 +39,9 @@ export default {
     isAuth() {
       return store.getters.isAuthenticated;
     },
+    isAdmin(){
+      return store.getters.isAdmin;
+    }
   },
 };
 </script>

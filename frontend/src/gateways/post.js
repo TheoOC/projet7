@@ -67,7 +67,6 @@ exports.createPost = (post, image) => {
     })
 };
 
-
 exports.updatePost = (post, image, post_id) => {
     return new Promise((resolve, reject) => {
         const formData = new FormData()

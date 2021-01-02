@@ -27,6 +27,17 @@ const ifAuthenticated = (to, from, next) => {
   next('/login')
 }
 
+const ifAdmin = (to, from, next) => {
+  console.log(`only admins can access this route`);
+  if (store.getters.isAuthenticated) {
+    if (store.getters.isAdmin) {
+      next()
+      return
+    }
+  }
+  next('/')
+}
+
 const hasPostPermissions = (to, from, next) => {
   console.log(`checking if user can edit post ${to.params.post_id} `);
   if (store.getters.isAuthenticated) {
@@ -125,6 +136,12 @@ const routes = [
     name: 'Signup',
     component: () => import('../views/auth/Signup.vue'),
     beforeEnter: ifNotAuthenticated,
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: () => import('../views/admin/Admin.vue'),
+    beforeEnter: ifAdmin
   },
   {
     path: '/',
