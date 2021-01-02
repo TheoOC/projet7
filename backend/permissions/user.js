@@ -55,7 +55,7 @@ function hasPermission(req) {
             .then((user) => {
                 //check if user is the same has the one in the params
                 userQ = parseInt(req.params.user_id);
-                if (user.id == userQ) {
+                if (user.id == userQ || user.isAdmin == true) {
                     resolve();
                 }
                 reject('does not have user permission');

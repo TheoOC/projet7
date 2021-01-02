@@ -87,8 +87,14 @@ const hasCommentPermissions = (to, from, next) => {
         store is admin : ${isAdmin}
         does user have permission to edit: ${comment.UserId == sUid || isAdmin}
         `);
-        if ((comment.Userid == sUid || isAdmin) === true) {
+        if ((comment.UserId == sUid || isAdmin) === true) {
+          console.log(`user has permission to edit comment ${comment_id}`);
           next();
+          return;
+        }
+        else {
+          console.log(`user does not have permission to edit comment ${comment_id} `);
+          next('/');
           return;
         }
       })
