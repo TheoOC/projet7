@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <p>this is the display account component</p>
     <p>email: {{ user.email }}</p>
     <p>username: {{ user.username }}</p>

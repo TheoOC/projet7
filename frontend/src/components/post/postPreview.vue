@@ -1,11 +1,16 @@
 <template>
-  <div class="container">
-    <button @click="redirectToPost">go to post {{ post.id }}</button>
-    <button @click="redirectToPostOwnerProfile">posted by: {{user.username}} </button>
-    <h3>Title: {{ post.title }}</h3>
-    <p>content: {{ post.textContent }}</p>
-    <p>{{ post.imageUrl }}</p>
-    <img :src="post.imageUrl" />
+  <div class="container rounded border border-primary my-1">
+    <div class="column">
+      <div class="row">
+      <button class="btn" @click="redirectToPost">go to post: {{ post.id }}</button>
+      <button class="btn" @click="redirectToPostOwnerProfile">
+        posted by: {{ user.username }}
+      </button>
+      </div>
+      <h3>{{ post.title }}</h3>
+      <p>{{ post.textContent }}</p>
+      <img class="img-fluid" :src="post.imageUrl" />
+    </div>
   </div>
 </template>
 
@@ -48,7 +53,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
-  border: 5px solid red;
-}
 </style>

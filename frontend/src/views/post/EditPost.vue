@@ -1,39 +1,49 @@
 <template>
-  <div>
+  <div class="container">
     <form @submit.prevent="editPost" method="PUT">
-      <label for="title">Title</label>
-      <input
-        required
-        v-model="title"
-        type="text"
-        id="title"
-        name="title"
-        placeholder="Title"
-      />
-
-      <label for="textContent">Text</label>
-      <textarea
-        required
-        v-model="textContent"
-        id="textContent"
-        name="text"
-        placeholder="write some text"
-      ></textarea>
-
-      <input
-        type="file"
-        accept="image/*"
-        @change="uploadImage($event)"
-        id="file-input"
-      />
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input
+          required
+          v-model="title"
+          type="text"
+          id="title"
+          name="title"
+          placeholder="Title"
+          class="form-control"
+        />
+      </div>
+      <div class="form-group">
+        <label for="textContent">Text</label>
+        <textarea
+          required
+          v-model="textContent"
+          id="textContent"
+          name="text"
+          placeholder="write some text"
+          class="form-control"
+          rows="2"
+        ></textarea>
+      </div>
+      <div class="form-group">
+        <label for="file-input">change image</label>
+        <input
+          type="file"
+          accept="image/*"
+          @change="uploadImage($event)"
+          id="file-input"
+        />
+      </div>
       <div>
-        <img v-if="imageUrl" :src="imageUrl" />
+        <img class="img-fluid" v-if="imageUrl" :src="imageUrl" />
       </div>
 
-      <input type="submit" value="Submit" />
+      <button class="btn btn-primary" type="submit">submit</button>
     </form>
-    <button @click="deletePost">delete Post</button>
-    <button @click="backToPost">go back to post {{ postId }}</button>
+    <button class="btn" @click="deletePost">delete Post</button>
+    <button class="btn" @click="backToPost">
+      go back to post {{ postId }}
+    </button>
   </div>
 </template>
 
@@ -97,8 +107,8 @@ export default {
           this.$router.push(`/post/${this.postId}`);
         })
         .catch((err) => {
-          console.log(`failed to call updatePost: ${err}`);
-          this.$router.push(`/post/${this.postId}`);
+          console.log(`error trying to update the post: ${err}`);
+          //check if error 422 if error 422 show error else redirect to posts
         });
     },
     deletePost: function () {

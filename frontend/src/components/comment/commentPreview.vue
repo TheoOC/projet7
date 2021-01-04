@@ -1,12 +1,18 @@
 <template>
-  <div class="container">
-    <p>{{ comment.textContent }}</p>
-    <div v-if="hasPermission === true">
-      <button @click="redirectToEditComment">edit comment</button>
+  <div class="container rounded border border-primary my-1">
+    <div class="column">
+      <div class="row">
+        <button class="btn" @click="redirectToCommentOwnerProfile">
+          comment by: {{ user.username }}
+        </button>
+        <div v-if="hasPermission === true">
+          <button class="btn" @click="redirectToEditComment">
+            edit comment
+          </button>
+        </div>
+      </div>
+      <p>{{ comment.textContent }}</p>
     </div>
-    <button @click="redirectToCommentOwnerProfile">
-      commented by: {{ user.username }}
-    </button>
   </div>
 </template>
 

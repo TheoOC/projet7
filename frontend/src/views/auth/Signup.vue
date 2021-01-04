@@ -1,22 +1,39 @@
 <template>
-  <div>
-    <form class="signup" @submit.prevent="signup">
+  <div class="vue-template">
+    <form @submit.prevent="signup">
       <h1>Sign up</h1>
-      <label>Email</label>
-      <input required v-model="email" type="email" placeholder="Snoopy" />
-
-      <label>Username</label>
-      <input required v-model="username" type="text" placeholder="Snoopy" />
-
-      <label>Password</label>
-      <input
-        required
-        v-model="password"
-        type="password"
-        placeholder="Password"
-      />
+      <div class="form-group">
+        <label>Email</label>
+        <input
+          required
+          v-model="email"
+          type="email"
+          placeholder="Snoopy"
+          class="form-control form-control-lg"
+        />
+      </div>
+      <div class="form-group">
+        <label>Username</label>
+        <input
+          required
+          v-model="username"
+          type="text"
+          placeholder="Snoopy"
+          class="form-control form-control-lg"
+        />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input
+          required
+          v-model="password"
+          type="password"
+          placeholder="Password"
+          class="form-control form-control-lg"
+        />
+      </div>
       <hr />
-      <button type="submit" value="submit">signup</button>
+      <button type="submit" value="submit" class="btn btn-dark btn-lg btn-block">signup</button>
     </form>
   </div>
 </template>
@@ -49,5 +66,7 @@ export default {
 };
 </script>
 
+<style lang="scss" scoped>
+</style>
 
 

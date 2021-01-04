@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="vue-template">
     <createPost v-on:get-all-posts="getAllPosts" />
     <postPreview v-for="post in posts" v-bind:post="post" :key="post.id" />
   </div>
@@ -46,9 +46,3 @@ export default {
   },
 };
 </script>
-
-<style  scoped>
-* {
-  white-space: pre-wrap;
-}
-</style>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="containter">
     <commentPreview
       v-for="comment of comments"
       v-bind:comment="comment"

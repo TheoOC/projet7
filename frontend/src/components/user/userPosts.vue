@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <postPreview v-for="post of posts" v-bind:post="post" :key="post.id" />
   </div>
 </template>

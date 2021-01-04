@@ -1,18 +1,24 @@
 <template>
-  <div>
+  <div class="container">
     <form @submit.prevent="editComment" method="PUT">
-      <label for="textContent">Text</label>
-      <textarea
-        required
-        v-model="textContent"
-        id="textContent"
-        name="text"
-        placeholder="write some text"
-      ></textarea>
-      <input type="submit" value="Submit" />
+      <div class="form-group">
+        <label for="textContent">Text</label>
+        <textarea
+          required
+          v-model="textContent"
+          id="textContent"
+          name="text"
+          placeholder="write some text"
+          class="form-control"
+        ></textarea>
+      </div>
+
+      <button class="btn btn-primary" type="submit">submit</button>
     </form>
-    <button @click="deleteComment">delete comment</button>
-    <button @click="backToPost">go back to post {{ postId }}</button>
+    <button class="btn" @click="deleteComment">delete comment</button>
+    <button class="btn" @click="backToPost">
+      go back to post {{ postId }}
+    </button>
   </div>
 </template>
 
@@ -66,8 +72,8 @@ export default {
           this.$router.push(`/post/${this.postId}`);
         })
         .catch((err) => {
-          console.log(`failed to call updateComment: ${err}`);
-          this.$router.push(`/post/${this.postId}`);
+          console.log(`error trying to update the comment: ${err}`);
+          //check if error 422 if error 422 show error else redirect to posts
         });
     },
     deleteComment: function () {
@@ -76,7 +82,7 @@ export default {
         .deleteComment(comment_id)
         .then(() => {
           console.log(`successfully called deleteComment`);
-          this.$router.push("/");
+          this.$router.push(`/post/${this.postId}`);
         })
         .catch((err) => {
           console.log(`failed to call deleteComment: ${err}`);

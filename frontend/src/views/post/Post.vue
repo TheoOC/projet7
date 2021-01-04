@@ -1,21 +1,26 @@
 <template>
-  <div>
-    <h2>Title: {{ post.title }}</h2>
-    <p>Content: {{ post.textContent }}</p>
-    <p>post id: {{ this.$route.params.post_id }}</p>
-    <p>{{ post }}</p>
-    <div v-if="hasPermission === true">
-      <button @click="redirectToEditPost">edit post</button>
+  <div class="container">
+    <div class="column">
+      <div class="row">
+        <button class="btn" @click="redirectToPostOwnerProfile">
+          posted by: {{ user.username }}
+        </button>
+        <div v-if="hasPermission === true">
+          <button class="btn" @click="redirectToEditPost">edit post</button>
+        </div>
+      </div>
+      <h2>{{ post.title }}</h2>
+      <p>{{ post.textContent }}</p>
+      <div>
+        <img class="img-fluid" v-if="post.imageUrl" :src="post.imageUrl" />
+      </div>
+      <createComment v-on:get-all-comments="getAllComments" />
+      <commentPreview
+        v-for="comment in comments"
+        v-bind:comment="comment"
+        :key="comment.id"
+      />
     </div>
-    <button @click="redirectToPostOwnerProfile">
-      posted by: {{ user.username }}
-    </button>
-    <createComment v-on:get-all-comments="getAllComments" />
-    <commentPreview
-      v-for="comment in comments"
-      v-bind:comment="comment"
-      :key="comment.id"
-    />
   </div>
 </template>
 

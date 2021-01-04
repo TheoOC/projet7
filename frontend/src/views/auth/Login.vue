@@ -1,40 +1,59 @@
 <template>
-  <div>
-    <form class="login" @submit.prevent="login">
-      <h1>login</h1>
-
+  <div class="vue-template">
+    <form @submit.prevent="login">
+      <h1>Login</h1>
       <template v-if="loginType === 'email'">
-        <label>email</label>
-        <input
-          required
-          v-model="email"
-          type="email"
-          placeholder="Snoopy"
-          key="email-input"
-        />
+        <div class="form-group">
+          <label>email</label>
+          <input
+            required
+            v-model="email"
+            type="email"
+            placeholder="Snoopy"
+            key="email-input"
+            class="form-control form-control-lg"
+          />
+        </div>
       </template>
 
       <template v-else>
-        <label>Username</label>
-        <input
-          required
-          v-model="username"
-          type="text"
-          placeholder="Snoopy"
-          key="username-input"
-        />
+        <div class="form-group">
+          <label>Username</label>
+          <input
+            required
+            v-model="username"
+            type="text"
+            placeholder="Snoopy"
+            key="username-input"
+            class="form-control form-control-lg"
+          />
+        </div>
       </template>
 
-      <label>Password</label>
-      <input
-        required
-        v-model="password"
-        type="password"
-        placeholder="Password"
-      />
+      <div class="form-group">
+        <label>Password</label>
+        <input
+          required
+          v-model="password"
+          type="password"
+          placeholder="Password"
+          class="form-control form-control-lg"
+        />
+      </div>
       <hr />
-      <button @click="changeLoginType">{{ message }}</button>
-      <button type="submit" value="submit">Login</button>
+      <button
+        type="submit"
+        value="submit"
+        class="btn btn-dark btn-lg btn-block"
+      >
+        Login
+      </button>
+      <button
+        @click="changeLoginType"
+        class="btn btn-light change-login-type text-right mt-2 mb-4"
+      >
+        {{ message }}
+      </button>
     </form>
   </div>
 </template>

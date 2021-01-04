@@ -1,22 +1,48 @@
 <template>
-  <div>
-    <nav>
+  <nav
+    class="navbar shadow bg-white rounded justify-content-between flex-nowrap flex-row fixed-top"
+  >
+    <div class="container">
       <div v-if="!isAuth">
-        <router-link to="/login">Login</router-link> |
-        <router-link to="/signup">Signup</router-link>
+        <ul class="nav navbar-nav flex-row float-right">
+          <li class="nav-item">
+            <router-link class="nav-link mx-1" to="/signup">Signup</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="btn btn-outline-primary mx-1" to="/login"
+              >Login</router-link
+            >
+          </li>
+        </ul>
       </div>
       <div v-else>
-        <router-link to="/">Home</router-link> |
-        <router-link :to="`/account/${getUserId}`">Account</router-link>
-        |
-        <Logout />
+        <ul class="nav navbar-nav flex-row float-right">
+          <li class="nav-item">
+            <router-link class="btn btn-outline-primary mx-1" to="/"
+              >Home</router-link
+            >
+          </li>
+          <li class="nav-item">
+            <router-link
+              class="btn btn-outline-success mx-1"
+              :to="`/account/${getUserId}`"
+              >Account</router-link
+            >
+          </li>
+          <li class="nav-item">
+            <Logout />
+          </li>
+          <div v-if="isAdmin">
+            <li class="nav-item">
+              <router-link class="btn btn-danger mx-1" to="/admin"
+                >admin pannel</router-link
+              >
+            </li>
+          </div>
+        </ul>
       </div>
-      <div v-if="isAdmin">
-        ||
-        <router-link to="/admin">admin pannel</router-link>
-      </div>
-    </nav>
-  </div>
+    </div>
+  </nav>
 </template>
 
 <script>
@@ -39,9 +65,9 @@ export default {
     isAuth() {
       return store.getters.isAuthenticated;
     },
-    isAdmin(){
+    isAdmin() {
       return store.getters.isAdmin;
-    }
+    },
   },
 };
 </script>

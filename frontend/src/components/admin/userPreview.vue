@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <div class="container border border-primary rounded">
+    <button class="btn" @click="redirectToProfile">got to profile</button>
     <h3>username: {{ user.username }}</h3>
-    <button @click="redirectToProfile">got to profile</button>
   </div>
 </template>
 <script>
@@ -18,9 +18,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.container {
-  border: 5px solid red;
-}
-</style>

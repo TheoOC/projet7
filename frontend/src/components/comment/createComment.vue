@@ -1,16 +1,19 @@
 <template>
-  <div>
+  <div class="container">
     <form class="" @submit.prevent="createComment" method="POST">
-      <label for="textContent">Text</label>
-      <textarea
-        required
-        v-model="textContent"
-        id="text"
-        name="text"
-        placeholder="write a comment text"
-      ></textarea>
-
-      <input type="submit" value="Submit" />
+      <div>
+        <label for="textContent">Text</label>
+        <textarea
+          required
+          v-model="textContent"
+          id="text"
+          name="text"
+          placeholder="write a comment text"
+          class="form-control"
+          rows="2"
+        ></textarea>
+      </div>
+      <button class="btn btn-primary" type="submit">submit</button>
     </form>
   </div>
 </template>

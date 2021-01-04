@@ -1,9 +1,18 @@
 <template>
-  <div>
-    <button v-for="tab in tabs" v-bind:key="tab" v-on:click="currentTab = tab">
-      {{ tab }}
-    </button>
-    <component v-bind:is="currentTabComponent" :key="user.id"></component>
+  <div class="container">
+    <div class="column">
+      <div class="row">
+        <button
+          class="btn btn-outline-success"
+          v-for="tab in tabs"
+          v-bind:key="tab"
+          v-on:click="currentTab = tab"
+        >
+          {{ tab }}
+        </button>
+      </div>
+      <component v-bind:is="currentTabComponent" :key="user.id"></component>
+    </div>
   </div>
 </template>
 <script>

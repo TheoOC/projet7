@@ -1,20 +1,23 @@
 <template>
-  <div>
+  <div class="container">
     <p>this is the edit account component</p>
+    <p>user id: {{ user.id }}</p>
     <p>email: {{ user.email }}</p>
     <form @submit.prevent="editAccount" method="PUT">
-      <label for="username">username</label>
-      <input
-        required
-        v-model="user.username"
-        id="username"
-        name="text"
-        placeholder="new username"
-      />
-      <input type="submit" value="Submit" />
+      <div class="form-group">
+        <label for="username">username</label>
+        <input
+          required
+          v-model="user.username"
+          id="username"
+          name="text"
+          placeholder="new username"
+          class="form-control"
+        />
+      </div>
+      <button class="btn btn-primary" type="submit">change username</button>
     </form>
-    <p>user id: {{ user.id }}</p>
-    <button @click="deleteAccount">delete account</button>
+    <button class="btn btn-danger" @click="deleteAccount">delete account</button>
   </div>
 </template>
 <script>
