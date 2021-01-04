@@ -62,7 +62,7 @@ const hasPostPermissions = (to, from, next) => {
         }
         else {
           console.log(`user does not have permission to edit post ${post_id} `);
-          next('/');
+          next(`/post/${post_id}`);
           return;
         }
       })

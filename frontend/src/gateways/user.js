@@ -41,7 +41,7 @@ exports.deleteUser = (user_id) => {
 }
 exports.getAllCommentsOfUser = (user_id) => {
     return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:3000/api/user/comment/${user_id}`)
+        axios.get(`http://localhost:3000/api/comment/user/${user_id}`)
             .then((res) => {
                 console.log(`got all comments of user: ${user_id}`);
                 resolve(res);
@@ -54,7 +54,7 @@ exports.getAllCommentsOfUser = (user_id) => {
 }
 exports.getAllPostsOfUser = (user_id) => {
     return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:3000/api/post/${user_id}`)
+        axios.get(`http://localhost:3000/api/post/user/${user_id}`)
             .then((res) => {
                 console.log(`got all posts of user: ${user_id}`);
                 resolve(res);

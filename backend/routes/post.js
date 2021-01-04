@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.get('/:post_id', auth, postCtrl.getPost);
 router.get('/', auth, postCtrl.getAllPosts);
-router.get('/:user_id', auth, postCtrl.getAllPostsOfUser);
+router.get('/user/:user_id', auth, postCtrl.getAllPostsOfUser);
 
 router.post('/', auth, multer, validatePostInput, postCtrl.createPost);
 router.put('/:post_id', auth, multer, authUpdatePost, validatePostInput, postCtrl.updatePost);

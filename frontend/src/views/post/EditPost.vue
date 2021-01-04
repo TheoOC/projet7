@@ -39,7 +39,7 @@
 
 <script>
 import pApi from "../../gateways/post";
-
+import store from "../../store/index";
 export default {
   name: "EditPost",
   data: function () {
@@ -49,6 +49,7 @@ export default {
       image: null,
       imageUrl: null,
       postId: "",
+      postUserId: "",
     };
   },
   methods: {
@@ -70,6 +71,7 @@ export default {
           this.textContent = post.textContent;
           this.imageUrl = post.imageUrl;
           this.postId = post.id;
+          this.postUserId = post.UserId;
           document.getElementById("title").defaultValue = this.title;
           document.getElementById(
             "textContent"
@@ -77,8 +79,9 @@ export default {
           console.log(`setDefaultInputValues successfull`);
         })
         .catch((error) => {
-          this.title = "";
-          this.textContent = "";
+          this.title = null;
+          this.textContent = null;
+          this.imageUrl = null;
           console.log(
             `there was an error getting the post from the api: ${error}`
           );
@@ -109,8 +112,27 @@ export default {
           console.log(`failed to call deletePost: ${err}`);
         });
     },
+    hasPermission: function () {
+      if (
+        !(
+          this.postUserId == store.getters.getUserId ||
+          store.getters.isAdmin == true
+        )
+      ) {
+        console.log(`can edit post`);
+      } else {
+        console.log(`can't edit post`);
+        this.$router.push(`/post/${this.postUserId}`);
+      }
+    },
   },
-  mounted: function () {
+  watch: {
+    "$route.params.post_id"() {
+      this.hasPermission();
+      this.setDefaultInputValues();
+    },
+  },
+  created: function () {
     this.setDefaultInputValues();
   },
 };

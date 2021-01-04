@@ -101,9 +101,9 @@ export default {
   },
   watch: {
     //watch for post id changes in url
-    $route() {
-      //get post from api
-      this.getPost();
+    "$route.params.post_id"() {
+      this.getPostInfos();
+      this.getAllComments();
     },
   },
   created: function () {
