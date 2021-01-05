@@ -14,12 +14,12 @@
         />
       </div>
       <div class="form-group">
-        <label for="textContent">Text</label>
+        <label for="text">Text</label>
         <textarea
           required
           v-model="textContent"
-          id="textContent"
           name="text"
+          id="text"
           placeholder="write some text"
           class="form-control"
           rows="2"

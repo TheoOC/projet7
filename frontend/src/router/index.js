@@ -171,7 +171,6 @@ const routes = [
     path: '/comment/:comment_id/edit',
     name: 'EditComment',
     component: () => import('../views/comment/EditComment.vue'),
-    props: true,
     beforeEnter: hasCommentPermissions,
   },
   {

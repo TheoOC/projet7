@@ -3,31 +3,34 @@
     <form @submit.prevent="signup">
       <h1>Sign up</h1>
       <div class="form-group">
-        <label>Email</label>
+        <label for="email">Email</label>
         <input
           required
           v-model="email"
           type="email"
+          id="email"
           placeholder="Snoopy"
           class="form-control form-control-lg"
         />
       </div>
       <div class="form-group">
-        <label>Username</label>
+        <label for="username">Username</label>
         <input
           required
           v-model="username"
           type="text"
+          id="username"
           placeholder="Snoopy"
           class="form-control form-control-lg"
         />
       </div>
       <div class="form-group">
-        <label>Password</label>
+        <label for="password">Password</label>
         <input
           required
           v-model="password"
           type="password"
+          id="password"
           placeholder="Password"
           class="form-control form-control-lg"
         />

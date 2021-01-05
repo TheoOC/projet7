@@ -52,13 +52,7 @@ export default {
       this.$router.push(`/account/${this.user.id}`);
     },
     redirectToEditComment: function () {
-      const url = this.comment.id;
-      //need to pass :comment_id as params because params are ignored if a path is specified
-      const pId = this.comment.PostId;
-      this.$router.push({
-        name: "EditComment",
-        params: { postId: pId, comment_id: url },
-      });
+      this.$router.push(`/comment/${this.comment.id}/edit`);
     },
   },
   created: function () {

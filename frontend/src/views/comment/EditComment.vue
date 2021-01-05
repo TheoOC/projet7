@@ -29,16 +29,11 @@ import error from "../../components/error/error";
 export default {
   name: "EditComment",
   components: { error },
-  props: {
-    postId: {
-      type: Number,
-      required: true,
-    },
-  },
   data: function () {
     return {
       textContent: "",
       error: "",
+      postId: "",
     };
   },
   methods: {
@@ -51,6 +46,7 @@ export default {
       cApi
         .getComment(comment_id)
         .then((comment) => {
+          this.postId = comment.PostId;
           this.textContent = comment.textContent;
           document.getElementById(
             "textContent"

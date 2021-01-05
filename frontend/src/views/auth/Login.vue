@@ -4,11 +4,12 @@
       <h1>Login</h1>
       <template v-if="loginType === 'email'">
         <div class="form-group">
-          <label>email</label>
+          <label for="email">email</label>
           <input
             required
             v-model="email"
             type="email"
+            id="email"
             placeholder="Snoopy"
             key="email-input"
             class="form-control form-control-lg"
@@ -18,11 +19,12 @@
 
       <template v-else>
         <div class="form-group">
-          <label>Username</label>
+          <label for="username">Username</label>
           <input
             required
             v-model="username"
             type="text"
+            id="username"
             placeholder="Snoopy"
             key="username-input"
             class="form-control form-control-lg"
@@ -31,11 +33,12 @@
       </template>
 
       <div class="form-group">
-        <label>Password</label>
+        <label for="password">Password</label>
         <input
           required
           v-model="password"
           type="password"
+          id="password"
           placeholder="Password"
           class="form-control form-control-lg"
         />
