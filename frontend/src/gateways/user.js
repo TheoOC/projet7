@@ -20,9 +20,12 @@ exports.updateUser = (username, user_id) => {
                 console.log(`updated user: ${user_id}`);
                 resolve();
             })
-            .catch((err) => {
-                console.log(`failed to update user: ${user_id}`);
-                reject(err);
+            .catch((error) => {
+                console.log(`update user request failed: `);
+                if (error.response.status == 422) {
+                    reject(JSON.stringify(error.response.data.details[0].message));
+                }
+                reject(error);
             });
     })
 }

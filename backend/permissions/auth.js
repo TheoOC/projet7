@@ -71,7 +71,7 @@ function validateLogInput(req) {
             //use xor because one of the keys is required but both at the same time is not authorized
             .xor('email', 'username');
         //if there is an email validate the schema
-        if (user.email) {
+        if (user.email != "") {
             //check if error is a validation error
             const { error, value } = schema.validate({ email: user.email, password: user.password });
             //if input is invalid error will be assigned a ValidationError
@@ -79,8 +79,8 @@ function validateLogInput(req) {
                 reject(error);
             }
         }
-        //else if ther is a username do the same
-        else if (user.username) {
+        //else if there is a username do the same
+        else if (user.username != "") {
             const { error, value } = schema.validate({ username: user.username, password: user.password });
             //if input is invalid error will be assigned a ValidationError
             if (Joi.isError(error)) {

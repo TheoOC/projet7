@@ -15,20 +15,26 @@
           class="form-control"
         />
       </div>
+      <error v-if="error" v-bind:error="error" />
       <button class="btn btn-primary" type="submit">change username</button>
     </form>
-    <button class="btn btn-danger" @click="deleteAccount">delete account</button>
+    <button class="btn btn-danger" @click="deleteAccount">
+      delete account
+    </button>
   </div>
 </template>
 <script>
 import store from "../../store/index";
 import uApi from "../../gateways/user";
+import error from "../../components/error/error";
 
 export default {
   name: "edit-account",
+  components: { error },
   data: function () {
     return {
       user: {},
+      error: "",
     };
   },
   methods: {
@@ -56,10 +62,12 @@ export default {
       uApi
         .updateUser({ username }, user_id)
         .then(() => {
+          this.error = "";
           console.log(`successfully called update user`);
         })
         .catch((err) => {
           console.log(`failed to call updata user: ${err}`);
+          this.error = err;
         });
     },
     deleteAccount: function () {

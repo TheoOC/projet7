@@ -12,7 +12,7 @@ function validateCommentInput(req, res, next) {
         .catch((error) => {
             console.log(`input invalid: ${error}`);
             res.status(422)
-            return res.send('input not valid');
+            return res.send(error);
         });
 };
 

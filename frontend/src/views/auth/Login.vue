@@ -41,6 +41,7 @@
         />
       </div>
       <hr />
+      <error v-if="error" v-bind:error="error" />
       <button
         type="submit"
         value="submit"
@@ -48,18 +49,21 @@
       >
         Login
       </button>
-      <button
-        @click="changeLoginType"
-        class="btn btn-light change-login-type text-right mt-2 mb-4"
-      >
-        {{ message }}
-      </button>
     </form>
+    <button
+      type="button"
+      @click="changeLoginType"
+      class="btn btn-light change-login-type text-right mt-2 mb-4"
+    >
+      {{ message }}
+    </button>
   </div>
 </template>
 
 <script>
+import error from "../../components/error/error";
 export default {
+  components: { error },
   data: function () {
     return {
       message: "connect with username",
@@ -67,6 +71,7 @@ export default {
       email: "",
       username: "",
       password: "",
+      error: "",
     };
   },
   methods: {
@@ -89,7 +94,7 @@ export default {
           this.$router.push("/");
         })
         .catch((err) => {
-          console.log(err);
+          this.error = err;
         });
     },
   },

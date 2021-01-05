@@ -33,20 +33,30 @@
         />
       </div>
       <hr />
-      <button type="submit" value="submit" class="btn btn-dark btn-lg btn-block">signup</button>
+      <error v-if="error" v-bind:error="error" />
+      <button
+        type="submit"
+        value="submit"
+        class="btn btn-dark btn-lg btn-block"
+      >
+        signup
+      </button>
     </form>
   </div>
 </template>
 
 <script>
 import auth from "../../gateways/auth";
+import error from "../../components/error/error";
 
 export default {
+  components: { error },
   data: function () {
     return {
       email: "",
       username: "",
       password: "",
+      error: "",
     };
   },
   methods: {
@@ -54,11 +64,12 @@ export default {
       const { email, username, password } = this;
       auth
         .signup({ email, username, password })
-        .then(() => {
+        .then((res) => {
+          console.log(res);
           this.$router.push("/login");
         })
-        .catch((error) => {
-          console.log(`signup error: ${error}`);
+        .catch((err) => {
+          this.error = err;
         });
       console.log("called signup method");
     },

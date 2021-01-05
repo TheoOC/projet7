@@ -22,8 +22,11 @@ exports.login = (data) => {
                 resolve(res.data);
             })
             .catch((error) => {
-                console.log(`login request failed`);
-                reject(`error trying to login: ${error}`)
+                console.log(`login request failed: `);
+                if (error.response.status == 422) {
+                    reject(JSON.stringify(error.response.data.details[0].message));
+                }
+                reject(error);
             });
 
     });
@@ -35,10 +38,14 @@ exports.signup = (data) => {
         axios.post('http://localhost:3000/api/auth/signup', data)
             .then((res) => {
                 console.log("success call to signup api");
-                resolve(res);
+                resolve(res.data);
             })
             .catch((error) => {
-                console.log(`error in call to signup api ${error}`);
+                console.log(`signup request failed`);
+                console.log(` ${JSON.stringify(error.response.data.details[0].message)} `)
+                if (error.response.status == 422) {
+                    reject(JSON.stringify(error.response.data.details[0].message));
+                }
                 reject(error);
             });
     })

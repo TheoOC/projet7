@@ -1,10 +1,14 @@
 <template>
-  <div>
+  <div class="vue-template">
     <h2>{{ errorMessage }}</h2>
     <div v-if="disconnect == true">
       <p>try logging in again</p>
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/signup">Signup</router-link>
+      <router-link class="btn btn-outline-warning" to="/login"
+        >Login</router-link
+      >
+      <router-link class="btn btn-outline-warning" to="/signup"
+        >Signup</router-link
+      >
     </div>
   </div>
 </template>

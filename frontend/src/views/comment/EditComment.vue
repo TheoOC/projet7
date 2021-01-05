@@ -12,7 +12,7 @@
           class="form-control"
         ></textarea>
       </div>
-
+      <error v-if="error" v-bind:error="error" />
       <button class="btn btn-primary" type="submit">submit</button>
     </form>
     <button class="btn" @click="deleteComment">delete comment</button>
@@ -24,9 +24,11 @@
 
 <script>
 import cApi from "../../gateways/comment";
+import error from "../../components/error/error";
 
 export default {
   name: "EditComment",
+  components: { error },
   props: {
     postId: {
       type: Number,
@@ -36,6 +38,7 @@ export default {
   data: function () {
     return {
       textContent: "",
+      error: "",
     };
   },
   methods: {
@@ -68,12 +71,13 @@ export default {
       cApi
         .updateComment(comment, comment_id)
         .then(() => {
+          this.error = "";
           console.log(`successfully called updateComment`);
           this.$router.push(`/post/${this.postId}`);
         })
         .catch((err) => {
           console.log(`error trying to update the comment: ${err}`);
-          //check if error 422 if error 422 show error else redirect to posts
+          this.error = err;
         });
     },
     deleteComment: function () {

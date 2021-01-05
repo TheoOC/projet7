@@ -28,7 +28,7 @@ function validatePostInput(req, res, next) {
             };
 
             res.status(422)
-            return res.send('input not valid');
+            return res.send(error);
         });
 };
 

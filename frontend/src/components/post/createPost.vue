@@ -40,6 +40,7 @@
       <div class="form-group">
         <img v-if="imageUrl" class="img-fluid" :src="imageUrl" />
       </div>
+      <error v-if="error" v-bind:error="error" />
       <button class="btn btn-primary" type="submit">submit</button>
       <button class="btn btn-danger" @click="clearInput">clear</button>
     </form>
@@ -49,14 +50,17 @@
 <script>
 import Post from "../../gateways/post";
 import store from "../../store/index";
+import error from "../error/error";
 
 export default {
+  components: { error },
   data: function () {
     return {
       title: "",
       textContent: "",
       image: null,
       imageUrl: null,
+      error: "",
     };
   },
   methods: {
@@ -71,9 +75,11 @@ export default {
       this.textContent = null;
       this.image = null;
       this.imageUrl = null;
+      this.error = ""
       this.$refs.fileInput.value = null;
     },
     createPost: function () {
+      this.error = "";
       const { title, textContent } = this;
       const userId = store.getters.getUserId;
       const post = { title, textContent, userId };
@@ -84,9 +90,10 @@ export default {
           console.log("successfully called create Post");
           this.$emit("get-all-posts");
         })
-        .catch((error) => {
+        .catch((err) => {
           this.clearInput();
-          console.log(`failed to call create post: ${error}`);
+          this.error = err;
+          console.log(`failed to call create post: ${err}`);
         });
     },
   },

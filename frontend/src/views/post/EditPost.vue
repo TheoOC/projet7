@@ -37,11 +37,11 @@
       <div>
         <img class="img-fluid" v-if="imageUrl" :src="imageUrl" />
       </div>
-
+      <error v-if="error" v-bind:error="error" />
       <button class="btn btn-primary" type="submit">submit</button>
     </form>
-    <button class="btn" @click="deletePost">delete Post</button>
-    <button class="btn" @click="backToPost">
+    <button type="button" class="btn" @click="deletePost">delete Post</button>
+    <button type="button" class="btn" @click="backToPost">
       go back to post {{ postId }}
     </button>
   </div>
@@ -50,8 +50,11 @@
 <script>
 import pApi from "../../gateways/post";
 import store from "../../store/index";
+import error from "../../components/error/error";
+
 export default {
   name: "EditPost",
+  components: { error },
   data: function () {
     return {
       title: "",
@@ -60,6 +63,7 @@ export default {
       imageUrl: null,
       postId: "",
       postUserId: "",
+      error: "",
     };
   },
   methods: {
@@ -108,6 +112,7 @@ export default {
         })
         .catch((err) => {
           console.log(`error trying to update the post: ${err}`);
+          this.error = err;
           //check if error 422 if error 422 show error else redirect to posts
         });
     },

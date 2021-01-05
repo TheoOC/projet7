@@ -61,7 +61,10 @@ exports.createPost = (post, image) => {
                 resolve();
             })
             .catch((error) => {
-                console.log(`there was an error creating the post ${error}`);
+                console.log(`create post request failed: `);
+                if (error.response.status == 422) {
+                    reject(JSON.stringify(error.response.data.details[0].message));
+                }
                 reject(error);
             })
     })
@@ -82,9 +85,12 @@ exports.updatePost = (post, image, post_id) => {
                 console.log(`updated post: ${post_id}`);
                 resolve();
             })
-            .catch((err) => {
-                console.log(`failed to update post: ${post_id}`);
-                reject(err);
+            .catch((error) => {
+                console.log(`update post request failed: `);
+                if (error.response.status == 422) {
+                    reject(JSON.stringify(error.response.data.details[0].message));
+                }
+                reject(error);
             });
     })
 };

@@ -19,11 +19,11 @@ function validateLoginInput(req, res, next) {
         .catch((error) => {
             console.log(`input invalid: ${error}`);
             res.status(422)
-            return res.send('input not valid');
+            return res.send(error);
         });
 };
 
-function validateSigninInput(req, res, next) {
+function validateSignupInput(req, res, next) {
     console.log(`in validateLoginInput`);
     const tReq = req;
     validateSignInput(tReq)
@@ -34,7 +34,7 @@ function validateSigninInput(req, res, next) {
         .catch((error) => {
             console.log(`input invalid: ${error}`);
             res.status(422)
-            return res.send('input not valid');
+            return res.send(error);
         });
 };
 function auth(req, res, next) {
@@ -70,6 +70,6 @@ function auth(req, res, next) {
 };
 module.exports = {
     validateLoginInput,
-    validateSigninInput,
+    validateSignupInput,
     auth
 }

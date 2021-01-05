@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-exports.getComment = (comment_id)=>{
+exports.getComment = (comment_id) => {
     return new Promise((resolve, reject) => {
         axios.get(`http://localhost:3000/api/comment/${comment_id}`)
             .then((comment) => {
@@ -23,7 +23,10 @@ exports.createComment = (data) => {
                 resolve()
             })
             .catch((error) => {
-                console.log(`failed to create comment: ${error}`);
+                console.log(`create comment request failed: `);
+                if (error.response.status == 422) {
+                    reject(JSON.stringify(error.response.data.details[0].message));
+                }
                 reject(error);
             });
     })
@@ -36,9 +39,12 @@ exports.updateComment = (data, comment_id) => {
                 console.log(`updated comment: ${comment_id}`);
                 resolve();
             })
-            .catch((err) => {
-                console.log(`failed to update comment: ${comment_id}`);
-                reject(err);
+            .catch((error) => {
+                console.log(`update comment request failed: `);
+                if (error.response.status == 422) {
+                    reject(JSON.stringify(error.response.data.details[0].message));
+                }
+                reject(error);
             });
     })
 }

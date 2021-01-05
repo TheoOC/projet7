@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <p>Error: {{ errorMessage }}</p>
-  </div>
+  <div class="alert alert-danger"> {{ error }}</div>
 </template>
 <script>
 export default {
   name: "errorComponent",
-  props: { errorMessage: { type: String, required: true } },
+  props: { error: { type: String, required: true } },
   data: function () {
     return {};
   },

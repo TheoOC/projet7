@@ -9,10 +9,10 @@ function validateUserInput(req, res, next) {
             console.log("input validated!!");
             next();
         })
-        .catch(() => {
-            console.log(`input invalid`);
+        .catch((error) => {
+            console.log(`input invalid: ${error}`);
             res.status(422)
-            return res.send('input not valid');
+            return res.send(error);
         });
 };
 

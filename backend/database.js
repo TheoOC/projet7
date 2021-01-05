@@ -1,9 +1,18 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const { applyExtraSetup } = require('./models/extra-setup');
-const mysql = require('mysql2');
 
-const sequelize = new Sequelize('projet7', 'root', '', {
-    host: 'localhost',
+const dotenv = require('dotenv');
+const result = dotenv.config();
+if (result.error) {
+    throw result.error;
+}
+//const mysql = require('mysql2');
+
+const sequelize = new Sequelize(
+    process.env.DATABASE_NAME,
+    process.env.DB_USER,
+    process.env.DB_PASSWORD, {
+    host: process.env.DB_HOST,
     dialect: 'mysql'
 });
 
@@ -24,33 +33,5 @@ applyExtraSetup(sequelize);
 module.exports = sequelize;
 
 
-/*
- function createDb() {
-    return new Promise((resolve, reject) => {
-        //create connection
-        const connection = mysql.createConnection({
-            host: "localhost",
-            user: "root",
-            password: ""
-        })
-
-        //create the database if it is not already created
-        connection.execute('CREATE DATABASE IF NOT EXISTS projet7;', function (err, results, fields) {
-            console.log(results);
-            console.log(fields);
-            if (err) reject(err);
-            console.log("Database created");
-            resolve();
-        })
-
-        resolve();
-    })
-}
-*/
-//Object.keys(models).forEach(key => {
-//console.log(models[key]);
-//models[key].associate(models);
-//})
-//sequelize.sync({ force: true });
 
 
