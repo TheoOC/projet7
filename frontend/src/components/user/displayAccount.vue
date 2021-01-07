@@ -1,9 +1,27 @@
 <template>
-  <div class="container">
-    <p>this is the display account component</p>
-    <p>email: {{ user.email }}</p>
-    <p>username: {{ user.username }}</p>
-    <p>user id: {{ user.id }}</p>
+  <div class="table-responsive my-1 py-1">
+    <table class="table table-user-information">
+      <tbody>
+        <tr>
+          <td>
+            <strong> email </strong>
+          </td>
+          <td class="text-primary">{{ user.email }}</td>
+        </tr>
+        <tr>
+          <td>
+            <strong> username </strong>
+          </td>
+          <td class="text-primary">{{ user.username }}</td>
+        </tr>
+        <tr>
+          <td>
+            <strong> user id </strong>
+          </td>
+          <td class="text-primary">{{ user.id }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
@@ -35,7 +53,6 @@ export default {
     },
   },
   created: function () {
-    console.log(`display account created called`);
     this.setDefaultInputValues();
   },
 };

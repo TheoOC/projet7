@@ -1,7 +1,11 @@
 <template>
-  <div class="container border border-primary rounded">
-    <button class="btn" @click="redirectToProfile">got to profile</button>
-    <h3>username: {{ user.username }}</h3>
+  <div class="container rounded my-1 py-1">
+    <div class="row">
+      <h3 class="col align-self-start">user: {{ user.username }}</h3>
+      <button class="btn btn-primary col-3 align-self-end" @click="redirectToProfile">
+        got to profile
+      </button>
+    </div>
   </div>
 </template>
 <script>

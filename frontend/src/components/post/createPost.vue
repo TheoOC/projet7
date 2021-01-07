@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container rounded my-1 pt-3 pb-2">
     <form class="" @submit.prevent="createPost" method="POST">
       <div class="form-group">
         <label for="title">Title</label>
@@ -37,12 +37,12 @@
           class="form-control-file"
         />
       </div>
-      <div class="form-group">
+      <div>
         <img v-if="imageUrl" class="img-fluid" :src="imageUrl" />
       </div>
       <error v-if="error" v-bind:error="error" />
-      <button class="btn btn-primary" type="submit">submit</button>
-      <button class="btn btn-danger" @click="clearInput">clear</button>
+      <button class="btn btn-dark m-1" type="submit">submit</button>
+      <button class="btn btn-danger m-1" @click="clearInput">clear</button>
     </form>
   </div>
 </template>
@@ -75,7 +75,7 @@ export default {
       this.textContent = null;
       this.image = null;
       this.imageUrl = null;
-      this.error = ""
+      this.error = "";
       this.$refs.fileInput.value = null;
     },
     createPost: function () {

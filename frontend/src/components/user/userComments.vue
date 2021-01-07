@@ -1,5 +1,10 @@
 <template>
-  <div class="containter">
+  <div class="container rounded">
+    <div v-if="commentsEmpty">
+      <div class="nothing-here">
+        <h3 class="text-center">... there is nothing here ...</h3>
+      </div>
+    </div>
     <commentPreview
       v-for="comment of comments"
       v-bind:comment="comment"
@@ -19,7 +24,6 @@ export default {
       comments: [],
     };
   },
-
   methods: {
     getAllCommentsOfUser: function () {
       console.log(`in get all comments`);
@@ -40,8 +44,12 @@ export default {
         });
     },
   },
+  computed: {
+    commentsEmpty() {
+      return this.comments === undefined || this.comments.length == 0;
+    },
+  },
   created: function () {
-    console.log("userComments created called");
     this.getAllCommentsOfUser();
   },
 };

@@ -1,17 +1,23 @@
 <template>
-  <div class="container rounded border border-primary my-1">
+  <div class="container rounded my-1 py-1 text-right">
     <div class="column">
       <div class="row">
-        <button class="btn" @click="redirectToCommentOwnerProfile">
+        <button
+          class="btn btn-light btn-text-custom mt-2 mb-4"
+          @click="redirectToCommentOwnerProfile"
+        >
           comment by: {{ user.username }}
         </button>
         <div v-if="hasPermission === true">
-          <button class="btn" @click="redirectToEditComment">
+          <button
+            class="btn btn-light btn-text-custom mt-2 mb-4"
+            @click="redirectToEditComment"
+          >
             edit comment
           </button>
         </div>
       </div>
-      <p>{{ comment.textContent }}</p>
+      <p class="m-0 p-0">{{ comment.textContent }}</p>
     </div>
   </div>
 </template>
@@ -60,9 +66,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.container {
-  border: 5px solid red;
-}
-</style>

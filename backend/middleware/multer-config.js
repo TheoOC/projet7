@@ -1,4 +1,6 @@
 const multer = require('multer');
+const path = require('path');
+
 const MIME_TYPES = {
     'image/jpg': 'jpg',
     'image/jpeg': 'jpg',
@@ -11,7 +13,7 @@ const storage = multer.diskStorage({
     },
     //change name of file so there is no name conflict
     filename: (req, file, callback) => {
-        const name = file.originalname.split(' ').join('_');
+        const name = path.parse(file.originalname.split(' ').join('_')).name;
         const extension = MIME_TYPES[file.mimetype];
         callback(null, name + Date.now() + '.' + extension);
     }

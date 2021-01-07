@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <p>this is the admin pannel</p>
+  <div class="container rounded">
     <userPreview v-for="user in users" v-bind:user="user" :key="user.id" />
   </div>
 </template>
@@ -33,7 +32,6 @@ export default {
     },
   },
   created: function () {
-    console.log(`in admin created`);
     this.getAllUsers();
   },
 };

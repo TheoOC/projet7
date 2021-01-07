@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container rounded my-1 py-1">
     <form class="" @submit.prevent="createComment" method="POST">
       <div>
         <label for="text">Text</label>
@@ -14,7 +14,7 @@
         ></textarea>
       </div>
       <error v-if="error" v-bind:error="error" />
-      <button class="btn btn-primary" type="submit">submit</button>
+      <button class="btn btn-dark mt-1" type="submit">submit</button>
     </form>
   </div>
 </template>

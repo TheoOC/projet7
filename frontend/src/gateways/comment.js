@@ -2,7 +2,7 @@ const axios = require('axios');
 
 exports.getComment = (comment_id) => {
     return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:3000/api/comment/${comment_id}`)
+        axios.get(`http://${process.env.VUE_APP_API_HOST}:${process.env.VUE_APP_API_PORT}/api/comment/${comment_id}`)
             .then((comment) => {
                 console.log(`successfully got comment from api:${JSON.stringify(comment.data)} `);
                 resolve(comment.data);
@@ -17,7 +17,7 @@ exports.getComment = (comment_id) => {
 
 exports.createComment = (data) => {
     return new Promise((resolve, reject) => {
-        axios.post(`http://localhost:3000/api/comment`, data)
+        axios.post(`http://${process.env.VUE_APP_API_HOST}:${process.env.VUE_APP_API_PORT}/api/comment`, data)
             .then((res) => {
                 console.log(`created comment: ${res}`);
                 resolve()
@@ -34,7 +34,7 @@ exports.createComment = (data) => {
 
 exports.updateComment = (data, comment_id) => {
     return new Promise((resolve, reject) => {
-        axios.put(`http://localhost:3000/api/comment/${comment_id}`, data)
+        axios.put(`http://${process.env.VUE_APP_API_HOST}:${process.env.VUE_APP_API_PORT}/api/comment/${comment_id}`, data)
             .then(() => {
                 console.log(`updated comment: ${comment_id}`);
                 resolve();
@@ -51,7 +51,7 @@ exports.updateComment = (data, comment_id) => {
 
 exports.deleteComment = (comment_id) => {
     return new Promise((resolve, reject) => {
-        axios.delete(`http://localhost:3000/api/comment/${comment_id}`)
+        axios.delete(`http://${process.env.VUE_APP_API_HOST}:${process.env.VUE_APP_API_PORT}/api/comment/${comment_id}`)
             .then(() => {
                 console.log(`deleted comment`);
                 resolve();

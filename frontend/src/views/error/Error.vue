@@ -1,14 +1,20 @@
 <template>
-  <div class="vue-template">
-    <h2>{{ errorMessage }}</h2>
-    <div v-if="disconnect == true">
-      <p>try logging in again</p>
-      <router-link class="btn btn-outline-warning" to="/login"
-        >Login</router-link
-      >
-      <router-link class="btn btn-outline-warning" to="/signup"
-        >Signup</router-link
-      >
+  <div class="vertical-center">
+    <div class="inner-block">
+      <div class="vue-template">
+        <div class="container rounded">
+          <h2>{{ errorMessage }}</h2>
+          <div v-if="disconnect == true">
+            <p>try logging in again</p>
+            <router-link class="btn btn-outline-dark m-1" to="/login"
+              >Login</router-link
+            >
+            <router-link class="btn btn-outline-dark m-1" to="/signup"
+              >Signup</router-link
+            >
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -21,6 +27,11 @@ export default {
   },
   data: function () {
     return {};
+  },
+  created: function () {
+    if (!this.errorMessage) {
+      this.$router.push("/");
+    }
   },
 };
 </script>

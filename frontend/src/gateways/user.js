@@ -2,7 +2,7 @@ const axios = require('axios');
 
 exports.getUserInfos = (user_id) => {
     return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:3000/api/user/${user_id}`)
+        axios.get(`http://${process.env.VUE_APP_API_HOST}:${process.env.VUE_APP_API_PORT}/api/user/${user_id}`)
             .then((user) => {
                 console.log(`successfully got user from api`);
                 resolve(user.data);
@@ -15,7 +15,7 @@ exports.getUserInfos = (user_id) => {
 }
 exports.updateUser = (username, user_id) => {
     return new Promise((resolve, reject) => {
-        axios.put(`http://localhost:3000/api/user/${user_id}`, username)
+        axios.put(`http://${process.env.VUE_APP_API_HOST}:${process.env.VUE_APP_API_PORT}/api/user/${user_id}`, username)
             .then(() => {
                 console.log(`updated user: ${user_id}`);
                 resolve();
@@ -31,7 +31,7 @@ exports.updateUser = (username, user_id) => {
 }
 exports.deleteUser = (user_id) => {
     return new Promise((resolve, reject) => {
-        axios.delete(`http://localhost:3000/api/user/${user_id}`)
+        axios.delete(`http://${process.env.VUE_APP_API_HOST}:${process.env.VUE_APP_API_PORT}/api/user/${user_id}`)
             .then(() => {
                 console.log(`delete user`);
                 resolve();
@@ -44,7 +44,7 @@ exports.deleteUser = (user_id) => {
 }
 exports.getAllCommentsOfUser = (user_id) => {
     return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:3000/api/comment/user/${user_id}`)
+        axios.get(`http://${process.env.VUE_APP_API_HOST}:${process.env.VUE_APP_API_PORT}/api/comment/user/${user_id}`)
             .then((res) => {
                 console.log(`got all comments of user: ${user_id}`);
                 resolve(res);
@@ -57,7 +57,7 @@ exports.getAllCommentsOfUser = (user_id) => {
 }
 exports.getAllPostsOfUser = (user_id) => {
     return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:3000/api/post/user/${user_id}`)
+        axios.get(`http://${process.env.VUE_APP_API_HOST}:${process.env.VUE_APP_API_PORT}/api/post/user/${user_id}`)
             .then((res) => {
                 console.log(`got all posts of user: ${user_id}`);
                 resolve(res);
@@ -71,7 +71,7 @@ exports.getAllPostsOfUser = (user_id) => {
 exports.getAllUsers = () => {
     return new Promise((resolve, reject) => {
         console.log(`in get all users`);
-        axios.get(`http://localhost:3000/api/user`)
+        axios.get(`http://${process.env.VUE_APP_API_HOST}:${process.env.VUE_APP_API_PORT}/api/user`)
             .then((res) => {
                 console.log(`got all users: ${res}`);
                 resolve(res);

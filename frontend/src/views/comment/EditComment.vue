@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container rounded my-1 pt-3 pb-2">
     <form @submit.prevent="editComment" method="PUT">
       <div class="form-group">
         <label for="textContent">Text</label>
@@ -13,10 +13,12 @@
         ></textarea>
       </div>
       <error v-if="error" v-bind:error="error" />
-      <button class="btn btn-primary" type="submit">submit</button>
+      <button class="btn btn-dark" type="submit">submit</button>
     </form>
-    <button class="btn" @click="deleteComment">delete comment</button>
-    <button class="btn" @click="backToPost">
+    <button class="btn btn-danger mt-2 mb-4" @click="deleteComment">
+      delete comment
+    </button>
+    <button class="btn btn-light btn-text-custom mt-2 mb-4" @click="backToPost">
       go back to post {{ postId }}
     </button>
   </div>

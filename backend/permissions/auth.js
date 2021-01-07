@@ -27,7 +27,7 @@ function validateSignInput(req) {
                 .required()
                 .min(4)
                 .max(30)
-                .pattern(new RegExp(/^[^\s].+[^\s]$/)),
+                .pattern(new RegExp(/^[^\s][^\s]+[^\s]$/)),
         })
         const { error, value } = schema.validate({
             email: user.email,
@@ -66,7 +66,7 @@ function validateLogInput(req) {
                 .required()
                 .min(4)
                 .max(30)
-                .pattern(new RegExp(/^[^\s].+[^\s]$/)),
+                .pattern(new RegExp(/^[^\s][^\s]+[^\s]$/)),
         })
             //use xor because one of the keys is required but both at the same time is not authorized
             .xor('email', 'username');

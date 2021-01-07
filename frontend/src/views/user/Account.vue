@@ -1,15 +1,19 @@
 <template>
-  <div class="container">
-    <div class="column">
-      <div class="row">
-        <button
-          class="btn btn-outline-success"
+  <div class="vue-template">
+    <div class="container rounded my-1 py-1">
+      <div
+        class="btn-group btn-group-md btn-group-toggle d-flex flex-wrap"
+        data-toggle="buttons"
+      >
+        <label
+          class="btn btn-outline-dark rounded-0"
           v-for="tab in tabs"
           v-bind:key="tab"
           v-on:click="currentTab = tab"
         >
+          <input class="" type="radio" :data-name="tab" :data-id="tab" />
           {{ tab }}
-        </button>
+        </label>
       </div>
       <component v-bind:is="currentTabComponent" :key="user.id"></component>
     </div>

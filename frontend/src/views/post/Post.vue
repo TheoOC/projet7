@@ -1,26 +1,41 @@
 <template>
-  <div class="container">
-    <div class="column">
-      <div class="row">
-        <button class="btn" @click="redirectToPostOwnerProfile">
-          posted by: {{ user.username }}
-        </button>
-        <div v-if="hasPermission === true">
-          <button class="btn" @click="redirectToEditPost">edit post</button>
+  <div>
+    <div class="container rounded my-1 pt-3 pb-2">
+      <div class="column">
+        <div class="row">
+          <button
+            class="btn btn-light btn-text-custom mt-2 mb-4"
+            @click="redirectToPostOwnerProfile"
+          >
+            posted by: {{ user.username }}
+          </button>
+          <div v-if="hasPermission === true">
+            <button
+              class="btn btn-light btn-text-custom mt-2 mb-4"
+              @click="redirectToEditPost"
+            >
+              edit post
+            </button>
+          </div>
+        </div>
+        <h3 class="text-center">{{ post.title }}</h3>
+        <p>{{ post.textContent }}</p>
+        <div>
+          <img
+            class="img-fluid mx-auto"
+            v-if="post.imageUrl"
+            :src="post.imageUrl"
+            :alt="imageName"
+          />
         </div>
       </div>
-      <h2>{{ post.title }}</h2>
-      <p>{{ post.textContent }}</p>
-      <div>
-        <img class="img-fluid" v-if="post.imageUrl" :src="post.imageUrl" />
-      </div>
-      <createComment v-on:get-all-comments="getAllComments" />
-      <commentPreview
-        v-for="comment in comments"
-        v-bind:comment="comment"
-        :key="comment.id"
-      />
     </div>
+    <createComment v-on:get-all-comments="getAllComments" />
+    <commentPreview
+      v-for="comment in comments"
+      v-bind:comment="comment"
+      :key="comment.id"
+    />
   </div>
 </template>
 
@@ -40,6 +55,7 @@ export default {
       user: {},
       post: {},
       comments: [],
+      imageName: "",
     };
   },
   computed: {
@@ -69,6 +85,9 @@ export default {
         .then((post) => {
           Vue.set(this, "post", post);
           const user_id = post.UserId;
+          if (post.imageUrl) {
+            this.imageName = post.imageUrl.split("/images/")[1];
+          }
           uApi
             .getUserInfos(user_id)
             .then((user) => {

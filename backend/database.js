@@ -6,7 +6,6 @@ const result = dotenv.config();
 if (result.error) {
     throw result.error;
 }
-//const mysql = require('mysql2');
 
 const sequelize = new Sequelize(
     process.env.DATABASE_NAME,

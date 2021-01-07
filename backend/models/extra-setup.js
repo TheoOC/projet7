@@ -1,8 +1,7 @@
 function applyExtraSetup(sequelize) {
     console.log("in extra setup");
 
-
-    sequelize.sync({ force: true })
+    sequelize.sync()
         .then(() => {
             console.log("synced all models")
         })

@@ -41,7 +41,6 @@ export default {
   },
   computed: {},
   created: function () {
-    console.log("beforeCreate called");
     this.getAllPosts();
   },
 };

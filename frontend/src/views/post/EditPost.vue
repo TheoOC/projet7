@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container rounded my-1 pt-3 pb-2">
     <form @submit.prevent="editPost" method="PUT">
       <div class="form-group">
         <label for="title">Title</label>
@@ -26,7 +26,7 @@
         ></textarea>
       </div>
       <div class="form-group">
-        <label for="file-input">change image</label>
+        <label for="file-input">change image:</label>
         <input
           type="file"
           accept="image/*"
@@ -35,13 +35,28 @@
         />
       </div>
       <div>
-        <img class="img-fluid" v-if="imageUrl" :src="imageUrl" />
+        <img
+          v-if="imageUrl"
+          class="img-fluid "
+          :src="imageUrl"
+          :alt="imageName"
+        />
       </div>
       <error v-if="error" v-bind:error="error" />
-      <button class="btn btn-primary" type="submit">submit</button>
+      <button class="btn btn-dark" type="submit">submit</button>
     </form>
-    <button type="button" class="btn" @click="deletePost">delete Post</button>
-    <button type="button" class="btn" @click="backToPost">
+    <button
+      type="button"
+      class="btn btn-danger mt-2 mb-4"
+      @click="deletePost"
+    >
+      delete Post
+    </button>
+    <button
+      type="button"
+      class="btn btn-light btn-text-custom mt-2 mb-4"
+      @click="backToPost"
+    >
       go back to post {{ postId }}
     </button>
   </div>
@@ -60,10 +75,11 @@ export default {
       title: "",
       textContent: "",
       image: null,
-      imageUrl: null,
+      imageUrl: "",
       postId: "",
       postUserId: "",
       error: "",
+      imageName: "",
     };
   },
   methods: {
@@ -86,10 +102,11 @@ export default {
           this.imageUrl = post.imageUrl;
           this.postId = post.id;
           this.postUserId = post.UserId;
+          if (post.imageUrl) {
+            this.imageName = post.imageUrl.split("/images/")[1];
+          }
           document.getElementById("title").defaultValue = this.title;
-          document.getElementById(
-            "textContent"
-          ).defaultValue = this.textContent;
+          document.getElementById("text").defaultValue = this.textContent;
           console.log(`setDefaultInputValues successfull`);
         })
         .catch((error) => {

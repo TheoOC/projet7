@@ -11,8 +11,9 @@ function validateInput(req) {
         req.body.textContent = req.body.textContent.trim();
         const schema = Joi.object({
             //allow whitespace only in the middle of the string and not at the beginning and end ( with ^\s witch mean no whitespace) 
-            //allow any charater with .
-            textContent: Joi.string().required().min(2).max(50).pattern(new RegExp(/^[^\s].+[^\s]$/)),
+            //allow any charater with . and allow a single white space character, 
+            //including space, tab, form feed, line feed, and other Unicode spaces 
+            textContent: Joi.string().required().min(2).max(50).pattern(new RegExp(/^[^\s](.|\s)+[^\s]$/)),
         });
         //if input is invalid error will be assigne a ValidationError
         const { error, value } = schema.validate({ textContent: req.body.textContent });

@@ -1,26 +1,49 @@
 <template>
-  <div class="container">
-    <p>this is the edit account component</p>
-    <p>user id: {{ user.id }}</p>
-    <p>email: {{ user.email }}</p>
-    <form @submit.prevent="editAccount" method="PUT">
-      <div class="form-group">
-        <label for="username">username</label>
-        <input
-          required
-          v-model="user.username"
-          id="username"
-          name="text"
-          placeholder="new username"
-          class="form-control"
-        />
-      </div>
-      <error v-if="error" v-bind:error="error" />
-      <button class="btn btn-primary" type="submit">change username</button>
-    </form>
-    <button class="btn btn-danger" @click="deleteAccount">
-      delete account
-    </button>
+  <div class="table-responsive my-1 py-1">
+    <table class="table table-user-information">
+      <tbody>
+        <tr>
+          <td>
+            <strong> email </strong>
+          </td>
+          <td class="text-primary">{{ user.email }}</td>
+        </tr>
+        <tr>
+          <td>
+            <form @submit.prevent="editAccount" method="PUT">
+              <div class="form-group">
+                <label for="username"><strong>username</strong></label>
+                <input
+                  required
+                  v-model="user.username"
+                  id="username"
+                  name="text"
+                  placeholder="new username"
+                  class="form-control"
+                />
+              </div>
+              <error v-if="error" v-bind:error="error" />
+              <button class="btn btn-dark" type="submit">
+                change username
+              </button>
+            </form>
+          </td>
+          <td class="text-primary">{{ user.username }}</td>
+        </tr>
+        <tr>
+          <td>
+            <strong> user id </strong>
+          </td>
+          <td class="text-primary">{{ user.id }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-danger" @click="deleteAccount">
+        delete account
+      </button>
+    </div>
   </div>
 </template>
 <script>
@@ -85,9 +108,6 @@ export default {
     },
   },
   created: function () {
-    console.log(`edit account created called`);
-  },
-  mounted: function () {
     this.setDefaultInputValues();
   },
 };

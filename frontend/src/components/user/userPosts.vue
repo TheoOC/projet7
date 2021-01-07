@@ -1,5 +1,10 @@
 <template>
-  <div class="container">
+  <div class="container rounded">
+    <div v-if="postsEmpty">
+      <div class="nothing-here">
+        <h3 class="text-center">... there is nothing here ...</h3>
+      </div>
+    </div>
     <postPreview v-for="post of posts" v-bind:post="post" :key="post.id" />
   </div>
 </template>
@@ -34,8 +39,12 @@ export default {
         });
     },
   },
+  computed: {
+    postsEmpty() {
+      return this.posts === undefined || this.posts.length == 0;
+    },
+  },
   created: function () {
-    console.log("userPosts created called");
     this.getAllPostsOfUser();
   },
 };

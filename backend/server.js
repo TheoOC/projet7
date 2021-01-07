@@ -44,10 +44,13 @@ const server = http.createServer(app);
 server.on('error', errorHandler);
 //console log the port when the server starts listening
 server.on('listening', () => {
-  const address = server.address();
+  const host = server.address().address;
+  const port = server.address().port;
+  const address = server.address()
   const bind = typeof address === 'string' ? 'pipe ' + address : 'port ' + port;
+  console.log('running at http://' + host + ':' + port);
   console.log('Listening on ' + bind);
 });
 
 //configure server to listen to the port
-server.listen(port);
+server.listen(port, `${process.env.SV_HOST}`);

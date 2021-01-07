@@ -5,20 +5,18 @@ import store from '../store/index'
 export default function setup() {
     axios.interceptors.request.use(function (config) {
         // Do something before request is sent
-        console.log(`THIS IS THE REQUEST INTERCEPTOR WHEN SUCCESSFULL`);
         return config;
     }, function (error) {
         // Do something with request error
-        console.log(`THIS IS THE REQUEST INTERCEPTOR WHEN FAILED`);
+        console.log(`REQUEST INTERCEPTOR FAILED`);
         return Promise.reject(error);
     });
 
     axios.interceptors.response.use(
         function (response) {
-            console.log(`THIS IS THE RESPONSE INTERCEPTOR WHEN SUCCESSFULL`);
             return response;
         }, function (err) {
-            console.log(`THIS IS THE RESPONSE INTERCEPTOR WHEN FAILED`);
+            console.log(`RESPONSE INTERCEPTOR FAILED`);
             if (err.response.status === 500) {
                 console.log(`ERR 500 INTERCEPTED`);
                 store.dispatch("AUTH_LOGOUT");

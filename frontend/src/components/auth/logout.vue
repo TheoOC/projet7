@@ -1,5 +1,5 @@
 <template>
-  <button @click="logout" class="btn btn-outline-warning mx-1">LOGOUT</button>
+  <button @click="logout" class="nav-link btn m-1">LOGOUT</button>
 </template>
 <script>
 export default {

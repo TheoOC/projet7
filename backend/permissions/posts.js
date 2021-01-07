@@ -25,12 +25,15 @@ function validateInput(req) {
                 .required()
                 .min(4)
                 .max(20)
-                .pattern(new RegExp(/^[^\s].+[^\s]$/)),
+                //allow whitespace only in the middle of the string and not at the beginning and end ( with ^\s witch mean no whitespace) 
+                //allow any charater with . and allow a single white space character, 
+                //including space, tab, form feed, line feed, and other Unicode spaces 
+                .pattern(new RegExp(/^[^\s](.|\s)+[^\s]$/)),
             textContent: Joi.string()
                 .required()
                 .min(4)
                 .max(100)
-                .pattern(new RegExp(/^[^\s].+[^\s]$/)),
+                .pattern(new RegExp(/^[^\s](.|\s)+[^\s]$/)),
 
         });
         //if input is invalid error will be assigne a ValidationError

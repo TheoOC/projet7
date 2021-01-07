@@ -1,6 +1,12 @@
 <template>
-  <div>
-    <h2>404 not found</h2>
+  <div class="vertical-center">
+    <div class="inner-block">
+      <div class="vue-template">
+        <div class="container rounded">
+          <h2>404 not found</h2>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
