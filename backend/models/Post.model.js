@@ -23,17 +23,6 @@ module.exports = (sequelize) => {
         timestamps: true
     });
 
-   //Post.associate = function (models) {
-   //    Post.hasMany(Comment, {
-   //        onDelete: 'cascade',
-   //    });
-   //    Post.belongsTo(User);
-   //};
-
-
-    //Post.sync({ force: true })
-    //    .then(() => { console.log("post model synchronized!! ") })
-    //    .catch((error) => { console.error("failed to alter the post table", error) });
 
     return Post;
 };

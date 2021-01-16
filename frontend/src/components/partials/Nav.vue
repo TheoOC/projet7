@@ -77,7 +77,7 @@
                 data-toggle="collapse"
                 data-target=".navbar-collapse.show"
               >
-                <router-link class="nav-link" to="/admin"
+                <router-link class="nav-link m-1" to="/admin"
                   >admin pannel</router-link
                 >
               </li>

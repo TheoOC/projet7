@@ -99,8 +99,12 @@ export default {
         .deleteUser(user_id)
         .then(() => {
           console.log(`successfully called delete user`);
-          store.dispatch("AUTH_LOGOUT");
-          this.$router.push("/signup");
+          if (store.getters.isAdmin == true) {
+            this.$router.push("/");
+          } else {
+            store.dispatch("AUTH_LOGOUT");
+            this.$router.push("/signup");
+          }
         })
         .catch((err) => {
           `failed to call delete user: ${err}`;

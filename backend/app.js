@@ -1,15 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const multer = require('multer');
-const upload = multer();
 
+//import database
 const sequelize = require('./database');
+
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
 const commentRoutes = require('./routes/comment');
 
+//.authenticate function to test if the connection is OK
 sequelize.authenticate().then(() => {
     console.log('connection has been established successfully');
 })
@@ -29,10 +30,6 @@ app.use(bodyParser.json());
 
 // for parsing application/xwww-
 app.use(bodyParser.urlencoded({ extended: true }));
-//form-urlencoded
-
-// for parsing multipart/form-data
-//app.use(upload.array());
 
 //tell express to manage the images ressources statically 
 app.use('/images', express.static(path.join(__dirname, 'images')));

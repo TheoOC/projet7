@@ -1,6 +1,7 @@
 function applyExtraSetup(sequelize) {
     console.log("in extra setup");
 
+    //create table if it does not exist
     sequelize.sync()
         .then(() => {
             console.log("synced all models")

@@ -17,16 +17,19 @@ function validateSignInput(req) {
         const schema = Joi.object({
             email: Joi.string()
                 .required()
+                //min 2 email domain segments and tld mus be a valid name listed on the IANA registry
                 .email({ minDomainSegments: 2, tlds: true }),
             username: Joi.string()
                 .required()
                 .min(3)
                 .max(30)
+                //all character except line terminators
                 .pattern(new RegExp(/^[^\s].+[^\s]$/)),
             password: Joi.string()
                 .required()
                 .min(4)
                 .max(30)
+                //all characters except line terminators and spaces
                 .pattern(new RegExp(/^[^\s][^\s]+[^\s]$/)),
         })
         const { error, value } = schema.validate({

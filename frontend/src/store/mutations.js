@@ -5,11 +5,9 @@ const AUTH_REQUEST = (state) => {
 };
 const AUTH_SUCCESS = (state, token) => {
     state.auth.status = 'success';
-    //state.user.token = token;
     Vue.set(state.user, 'token', token);
     Vue.set(state.user, 'userId', localStorage.getItem('user-id'));
     Vue.set(state.user, 'isAdmin', localStorage.getItem('is-admin'));
-    //state.user.userId = localStorage.getItem('user-id');
 };
 const AUTH_ERROR = (state) => {
     state.auth.status = 'error'

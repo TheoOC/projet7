@@ -17,15 +17,6 @@ module.exports = (sequelize) => {
 
     });
 
-   //Comment.associate = function (models) {
-   //    Comment.belongsTo(User);
-   //    Comment.belongsTo(Post);
-   //};
-
-
-    //Comment.sync({ force: true })
-    //    .then(() => { console.log("comment model synchronized!! ") })
-    //    .catch((error) => { console.error("failed to alter the model table", error) });
 
     return Comment;
 };
