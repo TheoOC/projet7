@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const Post = require('../models/post');
+const { Post } = require('../models');
 
 exports.getAllPostsOfUser = (req, res, next) => {
     const userQ = parseInt(req.params.user_id);

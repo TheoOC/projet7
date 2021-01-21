@@ -1,8 +1,7 @@
 const Joi = require('joi');
 const jwt = require('jsonwebtoken');
 
-const User = require('../models/user');
-const Comment = require('../models/comment');
+const { User, Comment } = require('../models');
 
 function validateInput(req) {
     return new Promise((resolve, reject) => {

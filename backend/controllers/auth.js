@@ -8,7 +8,7 @@ if (result.error) {
     throw result.error;
 }
 
-const User = require('../models/user');
+const { User } = require('../models');
 
 exports.autoAuthVerification = (req, res, next) => {
     //token verified in auth middleware now need to check if user is valid

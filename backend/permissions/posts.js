@@ -1,8 +1,7 @@
 const Joi = require('joi');
 const jwt = require('jsonwebtoken');
 
-const Post = require('../models/post');
-const User = require('../models/user');
+const { Post, User } = require('../models');
 
 const dotenv = require('dotenv');
 const result = dotenv.config();
