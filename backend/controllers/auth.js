@@ -8,7 +8,7 @@ if (result.error) {
     throw result.error;
 }
 
-const User = require('../models/User');
+const User = require('../models/user');
 
 exports.autoAuthVerification = (req, res, next) => {
     //token verified in auth middleware now need to check if user is valid
@@ -81,18 +81,27 @@ exports.login = (req, res, next) => {
 };
 exports.signup = (req, res, next) => {
     //check if username and email is already in the database
+    console.log('in signup controller');
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
             //create instance and save it to database with create instead of build and save
+            console.log('creating user');
             const user = User.create({
                 email: req.body.email,
                 username: req.body.username,
                 password: hash
             })
                 .then((user) => {
+                    console.log(`user created`);
                     res.status(200).json({ message: "user created" });
                 })
-                .catch((error) => res.status(400).json({ error }));
+                .catch((error) => {
+                    console.log(`failed to create user: ${error}`);
+                    res.status(400).json({ error });
+                });
         })
-        .catch(error => res.status(500).json({ error }));
+        .catch((error) => {
+            console.log(`bcrypt hash failed: ${error}`);
+            res.status(500).json({ error });
+        });
 };
