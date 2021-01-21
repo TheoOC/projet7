@@ -8,9 +8,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      /*
+
       userId: {
-        type: DataTypes.INTEGER,
+        type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'Users',
@@ -18,15 +18,15 @@ module.exports = {
         }
       },
       postId: {
-        type: DataTypes.INTEGER,
+        type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'Posts',
           key: 'id'
         }
-      },*/
+      },
       textContent: {
-        type: DataTypes.TEXT,
+        type: Sequelize.TEXT,
         allowNull: false,
       },
       createdAt: {
