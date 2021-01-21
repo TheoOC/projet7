@@ -1,4 +1,4 @@
-const Comment = require('../models/Comment');
+const Comment = require('../models/comment');
 
 exports.getAllCommentsOfPost = (req, res, next) => {
     const postQ = parseInt(req.params.post_id);

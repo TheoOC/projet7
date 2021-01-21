@@ -1,8 +1,8 @@
 const Joi = require('joi');
 const jwt = require('jsonwebtoken');
 
-const sequelize = require('../models/index');
-const { User, Comment } = sequelize.models;
+const User = require('../models/user');
+const Comment = require('../models/comment');
 
 function validateInput(req) {
     return new Promise((resolve, reject) => {

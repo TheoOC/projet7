@@ -1,8 +1,7 @@
 const Joi = require('joi');
 const jwt = require('jsonwebtoken');
 
-const sequelize = require('../models/index');
-const { User } = sequelize.models;
+const User = require('../models/user');
 
 const dotenv = require('dotenv');
 const result = dotenv.config();
