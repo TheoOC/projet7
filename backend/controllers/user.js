@@ -1,6 +1,4 @@
-const sequelize = require('../database');
-
-const User = require('../models/User.model')(sequelize);
+const User = require('../models/User');
 
 exports.getUser = (req, res, next) => {
     console.log(`user_id ---------> ${req.params.user_id}`);

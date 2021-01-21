@@ -1,7 +1,4 @@
-const sequelize = require('../database');
-
-const Comment = require('../models/Comment.model')(sequelize);
-
+const Comment = require('../models/Comment');
 
 exports.getAllCommentsOfPost = (req, res, next) => {
     const postQ = parseInt(req.params.post_id);

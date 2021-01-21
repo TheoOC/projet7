@@ -1,7 +1,6 @@
 const fs = require('fs');
 
-const sequelize = require('../database');
-const Post = require('../models/Post.model')(sequelize);
+const Post = require('../models/Post');
 
 exports.getAllPostsOfUser = (req, res, next) => {
     const userQ = parseInt(req.params.user_id);

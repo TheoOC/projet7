@@ -1,4 +1,3 @@
-const sequelize = require('../database');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { Op } = require("sequelize");
@@ -9,7 +8,7 @@ if (result.error) {
     throw result.error;
 }
 
-const User = require('../models/User.model')(sequelize);
+const User = require('../models/User');
 
 exports.autoAuthVerification = (req, res, next) => {
     //token verified in auth middleware now need to check if user is valid

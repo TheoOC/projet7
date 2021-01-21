@@ -1,7 +1,7 @@
 const Joi = require('joi');
 const jwt = require('jsonwebtoken');
 
-const sequelize = require('../database');
+const sequelize = require('../models/index');
 const { User, Comment } = sequelize.models;
 
 function validateInput(req) {

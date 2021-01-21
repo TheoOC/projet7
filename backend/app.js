@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 //import database
-const sequelize = require('./database');
+const sequelize = require('./models/index');
 
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
