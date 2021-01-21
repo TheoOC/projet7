@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 //import database
-const sequelize = require('./models/index');
+const database = require('./models/index');
 
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
@@ -11,7 +11,7 @@ const postRoutes = require('./routes/post');
 const commentRoutes = require('./routes/comment');
 
 //.authenticate function to test if the connection is OK
-sequelize.authenticate().then(() => {
+database.sequelize.authenticate().then(() => {
     console.log('connection has been established successfully');
 })
     .catch(error => console.error('Unable to connect to the database: ', error));
