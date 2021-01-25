@@ -10,11 +10,20 @@ const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
 const commentRoutes = require('./routes/comment');
 
-//.authenticate function to test if the connection is OK
-database.sequelize.authenticate().then(() => {
-    console.log('connection has been established successfully');
-})
-    .catch(error => console.error('Unable to connect to the database: ', error));
+//sync models
+database.sequelize.sync({})
+    .then(() => {
+        console.log(`synced database!`);
+        //.authenticate function to test if the connection is OK
+        database.sequelize.authenticate().then(() => {
+            console.log('connection has been established successfully');
+        })
+            .catch(error => console.error('Unable to connect to the database: ', error));
+    })
+    .catch((error) => {
+        console.log(`failed to sync database! :
+         ${error}`);
+    });
 
 const app = express();
 
