@@ -23,6 +23,17 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false
         }
       });
+
+      User.belongsToMany(models.User, {
+        as: 'friends',
+        foreignKey: 'user_id',
+        through: models.UsersFriends
+      });
+      User.belongsToMany(models.User, {
+        as: 'userFriends',
+        foreignKey: 'friend_id',
+        through: models.UsersFriends
+      });
     }
   };
   User.init({
@@ -43,6 +54,12 @@ module.exports = (sequelize, DataTypes) => {
     isAdmin: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
+    },
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true
     },
   }, {
     sequelize,
