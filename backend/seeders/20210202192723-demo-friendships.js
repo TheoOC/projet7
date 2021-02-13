@@ -2,12 +2,10 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('UserFriends', [{
-
-    }])
+    return queryInterface.bulkInsert('UserFriends', [{}]);
   },
 
   down: async (queryInterface, Sequelize) => {
-
+    return queryInterface.bulkDelete('UserFriends', [{}]);
   }
 };

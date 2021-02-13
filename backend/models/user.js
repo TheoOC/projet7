@@ -23,16 +23,31 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false
         }
       });
-
       User.belongsToMany(models.User, {
-        as: 'friends',
-        foreignKey: 'user_id',
-        through: models.UsersFriends
+        as: 'Requester',
+        onDelete: 'cascade',
+        through: 'FriendRequests',
+        foreignKey: 'requesterId'
       });
       User.belongsToMany(models.User, {
-        as: 'userFriends',
-        foreignKey: 'friend_id',
-        through: models.UsersFriends
+        as: 'Addressee',
+        onDelete: 'cascade',
+        through: 'FriendRequests',
+        foreignKey: 'addresseeId'
+      });
+
+      User.belongsToMany(models.User, {
+        as: 'User',
+        onDelete: 'cascade',
+        through: 'friends',
+        foreignKey: 'userId'
+      });
+      User.belongsToMany(models.User, {
+        as: 'Friend',
+        onDelete: 'cascade',
+        through: 'friends',
+        foreignKey: 'friendId'
+
       });
     }
   };
@@ -54,12 +69,6 @@ module.exports = (sequelize, DataTypes) => {
     isAdmin: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
-    },
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true
     },
   }, {
     sequelize,

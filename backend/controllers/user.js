@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Friends, friendRequests } = require('../models');
 
 exports.getUser = (req, res, next) => {
     console.log(`user_id ---------> ${req.params.user_id}`);
@@ -66,3 +66,30 @@ exports.deleteUser = (req, res, next) => {
         .then(() => { res.status(200).json({ message: "deleted user" }) })
         .catch((error) => { res.status(400).json({ error }) });
 };
+
+exports.addFriend = (req, res, next) => {
+    //add to friendrequests table
+}
+exports.acceptFriend = (req, res, next) => {
+    //move from friendrequest table to friends table
+}
+exports.declineFriend = (req, res, next) => {
+    //remove from friendrequest table
+}
+exports.deleteFriend = (req, res, next) => {
+    //remove from friends table
+}
+exports.getFriends = (req, res, next) => {
+    //get friends form friends table 
+    //get all FriendId witch have the UserId column corresponding to the :user_id
+    //of the uri in the row
+}
+exports.getFriendRequestReceived = (req, res, next) => {
+    //get all addresseeId from the friendrequest table witch 
+    //have the same id as the :user_id in uri
+}
+exports.getFriendRequestSent = (req, res, next) => {
+    //get all requesterId from the friendrequest table witch 
+    //have the same id as the :user_id in uri
+
+}
