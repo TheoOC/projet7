@@ -11,7 +11,9 @@ enter backend folder and run: npm install
 enter frontend folder and run: npm install
 
 before starting backend check that mysql is started 
-and create a database with name database_development.
+then create the database and the tables with: 
+npx sequelize-cli db:create
+npx sequelize-cli db:migrate
 
 edit config.json in config folder in backend if needed.
 
